@@ -1,9 +1,14 @@
+import { useState } from "react";
 import Upload from "../FileUploading/Upload";
 function DocumentAnalysis(){
+    const [files,setFiles]=useState([])
+    const documentAnalysis=()=>{
+        
+    }
     return(
         <>
             <h1>Document Analysis</h1>
-            <Upload FeatureName={'document-analysis'}></Upload>
+            <Upload featureName={'document-analysis'} files={files} setFiles={setFiles}></Upload>
         </>
     );
 }

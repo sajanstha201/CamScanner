@@ -30,11 +30,12 @@ export function Login(){
         })
         await axios.post(base_url+'api/login/',userLoginInfo)
         .then((response)=>{
+            dispatch(setUserInfo(response.data))
             dispatch(setIsLogin(true))
-            dispatch(setUserInfo(response))
         })
         .catch((error)=>{
             showAlert('Incorrect Username or Password','red')
+            activate_loader(false)
         })
     }
     return(

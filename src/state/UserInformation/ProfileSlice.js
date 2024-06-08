@@ -13,11 +13,16 @@ export const ProfileSlice=createSlice({
     },
     reducers:{
         setIsLogin:(state,action)=>{
-            state.isLogin=action.payload
+            state.isLogin=action.payload;
         },
         setUserInfo:(state,action)=>{
-            state=action.payload;
-            state.isLogin=true;
+            const userInfo=action.payload
+            state.username=userInfo.username;
+            state.email=userInfo.email;
+            state.first_name=userInfo.first_name;
+            state.last_name=userInfo.last_name;
+            state.token=userInfo.token;
+            state.token='Token '+state.token;
         }
     }
 })

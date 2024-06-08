@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import logo_image from '../../static/images/logo.jpg'
-import './Navbar.css'
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserNavbar from './UserNavbar';
-function Navbar(){
+import { Navbar as NavbarB,Nav,NavDropdown, Container } from 'react-bootstrap';
+export const Navbar=()=>{
     const userInfo=useSelector((state)=>state.user_profile)
     const loc=useLocation()
     const [userNavbarIsOpen,setUserNavbarIsOpen]=useState(true)
@@ -19,6 +19,48 @@ function Navbar(){
         document.getElementById('user-dp1').style.display='none';
     }
     return(
+        <NavbarB bg="dark" expand="lg" className="bg-body-tertiary shadow-sm" style={{marginBottom:'15px'}}>
+        <Container  fluid>
+            <NavbarB.Brand as={Link} to="/" style={{marginRight:'50px'}}>
+                <img
+                    src={logo_image}
+                    alt="Logo"
+                    width="50"
+                    height="50"
+                    className="d-inline-block align-top"
+                />{' '}
+            </NavbarB.Brand>
+            <NavbarB.Toggle aria-controls="basic-navbar-nav" />
+            <NavbarB.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/pdf-conversion">Pdf Conversion</Nav.Link>
+                    <Nav.Link as={Link} to="/table-extraction">Table Extraction</Nav.Link>
+                    <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
+                </Nav>
+                {!userInfo.isLogin && (
+                    <Nav>
+                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
+                    </Nav>
+                )}
+                {userInfo.isLogin && (
+                    <Nav>
+                        <Nav.Link>
+                            <img
+                                src={logo_image}
+                                alt="User DP"
+                                className="user-dp"
+                                id="user-dp1"
+                                onClick={showUserNavbar}
+                            />
+                        </Nav.Link>
+                    </Nav>
+                )}
+            </NavbarB.Collapse>
+        </Container>
+    </NavbarB>
+        /*
+
         <div id='navbar'>
             <Link id='logo' to='/'>
             <img src={logo_image}></img>
@@ -37,6 +79,6 @@ function Navbar(){
                 </div>
             )}
         </div>
+        */
     )
 }
-export default Navbar;

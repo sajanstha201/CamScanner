@@ -1,41 +1,42 @@
 import './UploadedFiles.css'
-import logo from '../../static/images/logo.jpg'
-import { useEffect ,useState} from 'react';
-import { FaChevronUp,FaChevronDown } from 'react-icons/fa'; // FontAwesome
-import { MdExpandLess } from 'react-icons/md'
-function UploadedFiles({files,setFiles,FeatureName}){
+import {useState} from 'react';
+import AddFiles from './AddFiles';
+function UploadedFiles({files,setFiles,featureName}){
     const [position, setPosition] = useState(0);
     const [scrollAmout,setScrollAmount]=useState(0)
     const deleteImage=(e)=>{
         const image=e.target.parentNode;
-        const imageName=image.id.replace('-div','');
-        console.log(imageName)
-        setFiles(prevFiles=>prevFiles.filter((file)=>file.name!==imageName))
-        console.log(files)
+        const imageId=image.id.replace('-div','');
+        setFiles(prevFiles=>prevFiles.filter((file,index)=>index!==parseInt(imageId)))
     }
-    useEffect(() => {
-        const displayFiles = document.querySelector('.uploaded-inner-container');
-        displayFiles.innerHTML = ''; 
-        for (let i = 0; i < files.length; i++) {
-            const innerdisplayFiles=document.createElement('div')
-            innerdisplayFiles.className='uploaded-inner-image-container'
-            innerdisplayFiles.id=files[i].name+'-div';
-            const file = files[i];
-            const imgElement = document.createElement('img');
-            imgElement.src = logo;
-            imgElement.alt = `File ${i}`;
-            innerdisplayFiles.appendChild(imgElement);
-            const crossButton=document.createElement('div');
-            crossButton.className='cross-buttons';
-            crossButton.id=files[i].name+'-cross-button';
-            crossButton.onclick=deleteImage;
-            innerdisplayFiles.appendChild(crossButton)
-            displayFiles.appendChild(innerdisplayFiles)
-        }
-    }, [files]); 
+    const handleDrop=(e,newIndex)=>{
+        e.preventDefault();
+        const oldIndex = parseInt(e.dataTransfer.getData('index'));
+        const newList=[...files]
+        const [movedFile]=newList.splice(oldIndex,1);
+        newList.splice(newIndex,0,movedFile)
+        setFiles(newList)
+        console.log(oldIndex,newIndex)
+
+    }
+    const handleDragStart=(e,index)=>{
+        e.dataTransfer.setData('index',index)
+    }
     return (
-        <div id={FeatureName + 'uploaded-outer-container'} className='uploaded-outer-container'>
+        <div id={featureName + 'uploaded-outer-container'} className='uploaded-outer-container'>
             <div className='uploaded-inner-container'>
+            {files.map((file, index) => (
+                <div key={index+ '-div'} className='uploaded-inner-image-container' id={index+ '-div'} 
+                draggable
+                onDragStart={(e)=>{handleDragStart(e,index)}}
+                onDragOver={(e)=>{e.preventDefault()}}
+                onDrop={(e)=>{handleDrop(e,index)}}>   
+                <div className='indexing-div'>{index+1}</div>
+                <img src={URL.createObjectURL(file)} alt={`File ${index}`} />
+                <div className='cross-buttons' id={index+ '-cross-button'} onClick={deleteImage}></div>
+                </div>
+                ))}
+                <AddFiles featureName={featureName} files={files} setFiles={setFiles}></AddFiles>
             </div>
         </div>
     );

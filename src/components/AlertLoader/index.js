@@ -1,7 +1,6 @@
 export function activate_loader(bool_value){
     document.getElementById('loader-box').style.display=bool_value?'flex':'none';
     document.getElementById('blur-box').style.display=bool_value?'flex':'none';
-    document.getElementById('alert-box').style.display='none';
 }
 export function showAlert(message, type) {
     const alertContainer = document.getElementById('alert-container');
