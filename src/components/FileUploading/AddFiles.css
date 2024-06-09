@@ -1,7 +1,8 @@
 .additional-files{
     width:200px;
     height:250px;
-    background-color: lightblue;
+    background-color: #ffffff;
+    filter: brightness(90%);
     position: relative;
     border-radius: 5px;
     border: 2px solid black;

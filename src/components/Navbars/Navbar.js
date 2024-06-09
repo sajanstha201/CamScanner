@@ -30,6 +30,20 @@ export const Navbar=()=>{
                     className="d-inline-block align-top"
                 />{' '}
             </NavbarB.Brand>
+            {/*
+            <NavbarB.Toggle aria-controls="user-profile-navbar" />
+            
+                <NavbarB.Collapse id="user-profile-navbar">
+                <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/pdf-conversion">My Profile</Nav.Link>
+                    <Nav.Link as={Link} to="/table-extraction">Contact Us</Nav.Link>
+                    <Nav.Link as={Link} to="/document-analysis">Setting</Nav.Link>
+                </Nav>
+                </NavbarB.Collapse>
+            */}
+
+
+            
             <NavbarB.Toggle aria-controls="basic-navbar-nav" />
             <NavbarB.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

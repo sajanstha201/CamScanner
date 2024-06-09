@@ -9,6 +9,7 @@ export function Login(){
     const user_profile=useSelector((state)=>state.user_profile)
     const dispatch=useDispatch()
     const base_url=useSelector((state)=>state.base_url.value)
+    console.log(base_url)
     const [userLoginInfo,setuserLoginInfo]=useState({'username':'','password':''})
     if(user_profile.isLogin){
         activate_loader(false);

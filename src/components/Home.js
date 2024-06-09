@@ -78,6 +78,11 @@ function Home({token}){
     }
     const changeWindow=()=>{
         const file=document.getElementById('input_image').files[0];
+        const reader=new FileReader()
+        reader.onload=(e)=>{
+            console.log(e.target.result)
+        }
+        reader.readAsText(file)
         console.log(file)
         const url=URL.createObjectURL(file)
         const newWin=window.open(`/display-pdf?file=${encodeURIComponent(url)}`, '_blank')

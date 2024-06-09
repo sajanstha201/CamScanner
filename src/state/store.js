@@ -5,5 +5,6 @@ export const store=configureStore({
     reducer:{
        base_url:baseUrlReducer,
        user_profile:userProfileReducer,
+       
     }
 })
