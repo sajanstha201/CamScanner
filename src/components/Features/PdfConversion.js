@@ -21,16 +21,20 @@ export function PdfConversion() {
                 headers: { 'Authorization': userProfile.token }
             });
             setResultDetail(response.data);
-            console.log('response detail:',response.data)
             const pdfResponse = await axios.get(baseUrl + response.data.file.substring(1) + '/', {
                 headers: { 'Authorization': userProfile.token },
             });
             const pdfBlob = new Blob([pdfResponse.data], { type: 'application/pdf' });
-            const url = URL.createObjectURL(pdfBlob);
-            const newWin = window.open(`/display-pdf?file=${encodeURIComponent(url)}`, '_blank');
-            newWin.focus();
-
+            if(pdfBlob){
+                const url = URL.createObjectURL(pdfBlob);
+                const newWin = window.open(`/display-pdf?file=${encodeURIComponent(url)}`, '_blank');
+                newWin.focus();
+            }
+            else{
+                showAlert('Empty Pdf', 'red');
+            }
         } catch (error) {
+            console.log(error)
             showAlert(error.message || error, 'red');
         } finally {
             activate_loader(false);
@@ -40,7 +44,7 @@ export function PdfConversion() {
         <div>
             <h1>PDF Conversion</h1>
             <Upload featureName={'pdf-conversion'} files={files} setFiles={setFiles} />
-            {files.length !== 0 && (
+            {files.inputFiles.length !== 0 && (
                 <div id='pdf-conversion-submit-button' className='pdf-conversion-submit-button'>
                     <div onClick={convertToPdf}>
                         Convert

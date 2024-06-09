@@ -13,16 +13,10 @@ export function TableExtraction(){
         try{
             activate_loader(true);
             const imageFormData = new FormData();
-            files.inputFiles.forEach(file => imageFormData.append('images', file));
-            console.log(files.inputFiles)
-            console.log("form data detail:")
-            imageFormData.forEach(function(value, key) {
-                console.log(key + ': ' + value);
-            });
+            files.inputFiles.forEach(file => imageFormData.append('image', file));
             const response=await axios.post(baseUrl+'api/images/',imageFormData,{
                 headers:{ 'Authorization': userInfo.token }
             })
-            console.log(response)
             /*
             const respone2=await axios.get(baseUrl+'',{
                 Headers:{ 'Authorization': userInfo.token }
@@ -41,8 +35,7 @@ export function TableExtraction(){
         <>
          <h1>Table extraction</h1>
        <Upload featureName={'table-extraction'} files={files} setFiles={setFiles}></Upload>
-       <button onClick={tableExtraction}>Extract Table</button>
-       
+       {files.inputFiles.length!=0&&<div id='table-extraction-submit-button'><div onClick={tableExtraction} > Extract Table</div></div>}
         </>
     )
 }
