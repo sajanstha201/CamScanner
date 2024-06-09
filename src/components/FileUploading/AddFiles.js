@@ -4,7 +4,7 @@ import { faPlus ,faCircle } from '@fortawesome/free-solid-svg-icons';
 function AddFiles({featureName,files,setFiles}){
     const addAdditionalFiles=(e)=>{
         const additionalFiles=document.getElementById(featureName+'-additional-input-files').files
-        setFiles(prevFiles=>[...prevFiles,...additionalFiles])
+        setFiles(prevFiles=>({...prevFiles,inputFiles:[...prevFiles.inputFiles,...additionalFiles]}))
     }
     return(
         <div  className='additional-files'>

@@ -4,30 +4,27 @@ import Upload from '../FileUploading/Upload';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { showAlert, activate_loader } from '../AlertLoader/index';
+import { usePdfConversionFile } from '../../context/AppProvider';
 
 export function PdfConversion() {
-    const [files, setFiles] = useState([]);
+    const {pdfConversionFile: files,setPdfConversionFile:setFiles}=usePdfConversionFile()
+    //const [files,setFiles]=useState({inputFiles:[],result:'asfsld'})
     const [resultDetail, setResultDetail] = useState(null);
-    const user_profile = useSelector((state) => state.user_profile);
-    const base_url = useSelector((state) => state.base_url).value;
+    const userProfile = useSelector((state) => state.userProfile);
+    const baseUrl = useSelector((state) => state.baseUrl).value;
     const convertToPdf = async () => {
         activate_loader(true);
         const imageFormData = new FormData();
-        files.forEach(file => imageFormData.append(file.name, file));
-
+        files.inputFiles.forEach(file => imageFormData.append('images', file));
         try {
-            const response = await axios.post(base_url + 'api/scanned-files/', imageFormData, {
-                headers: { 'Authorization': user_profile.token }
+            const response = await axios.post(baseUrl + 'api/scanned-files/', imageFormData, {
+                headers: { 'Authorization': userProfile.token }
             });
-
             setResultDetail(response.data);
-            console.log('File path information:', response.data);
-
-            const pdfResponse = await axios.get(base_url + response.data.file.substring(1) + '/', {
-                headers: { 'Authorization': user_profile.token },
-                responseType:'arraybuffer'
+            console.log('response detail:',response.data)
+            const pdfResponse = await axios.get(baseUrl + response.data.file.substring(1) + '/', {
+                headers: { 'Authorization': userProfile.token },
             });
-            console.log('pdf data',pdfResponse.data)
             const pdfBlob = new Blob([pdfResponse.data], { type: 'application/pdf' });
             const url = URL.createObjectURL(pdfBlob);
             const newWin = window.open(`/display-pdf?file=${encodeURIComponent(url)}`, '_blank');
@@ -39,7 +36,6 @@ export function PdfConversion() {
             activate_loader(false);
         }
     };
-
     return (
         <div>
             <h1>PDF Conversion</h1>

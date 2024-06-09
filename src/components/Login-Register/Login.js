@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {activate_loader,showAlert} from '../AlertLoader/index'
 import { setIsLogin ,setUserInfo} from '../../state/UserInformation/ProfileSlice';
 export function Login(){
-    const user_profile=useSelector((state)=>state.user_profile)
+    const user_profile=useSelector((state)=>state.userProfile)
     const dispatch=useDispatch()
-    const base_url=useSelector((state)=>state.base_url.value)
-    console.log(base_url)
+    const base_url=useSelector((state)=>state.baseUrl.value)
     const [userLoginInfo,setuserLoginInfo]=useState({'username':'','password':''})
     if(user_profile.isLogin){
         activate_loader(false);

@@ -7,15 +7,16 @@ function UploadedFiles({files,setFiles,featureName}){
     const deleteImage=(e)=>{
         const image=e.target.parentNode;
         const imageId=image.id.replace('-div','');
-        setFiles(prevFiles=>prevFiles.filter((file,index)=>index!==parseInt(imageId)))
+        setFiles(prevFiles=>({...prevFiles,inputFiles:prevFiles.inputFiles.filter((_,index)=>index!==parseInt(imageId))}))
+        console.log(files)
     }
     const handleDrop=(e,newIndex)=>{
         e.preventDefault();
         const oldIndex = parseInt(e.dataTransfer.getData('index'));
-        const newList=[...files]
+        const newList=[...files.inputFiles]
         const [movedFile]=newList.splice(oldIndex,1);
         newList.splice(newIndex,0,movedFile)
-        setFiles(newList)
+        setFiles(prevFile=>({...prevFile,inputFiles:newList}))
         console.log(oldIndex,newIndex)
 
     }
@@ -25,7 +26,7 @@ function UploadedFiles({files,setFiles,featureName}){
     return (
         <div id={featureName + 'uploaded-outer-container'} className='uploaded-outer-container'>
             <div className='uploaded-inner-container'>
-            {files.map((file, index) => (
+            {files.inputFiles.map((file, index) => (
                 <div key={index+ '-div'} className='uploaded-inner-image-container' id={index+ '-div'} 
                 draggable
                 onDragStart={(e)=>{handleDragStart(e,index)}}

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import UserNavbar from './UserNavbar';
 import { Navbar as NavbarB,Nav,NavDropdown, Container } from 'react-bootstrap';
 export const Navbar=()=>{
-    const userInfo=useSelector((state)=>state.user_profile)
+    const userInfo=useSelector((state)=>state.userProfile)
     const loc=useLocation()
     const [userNavbarIsOpen,setUserNavbarIsOpen]=useState(true)
     const path=['/login','/register']

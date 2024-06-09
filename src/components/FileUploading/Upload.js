@@ -8,8 +8,8 @@ function Upload({featureName,files,setFiles}){
 
     return(
         <> 
-        {(files.length===0)&&<InputUpload featureName={featureName} files={files} setFiles={setFiles}></InputUpload>}
-        {(files.length!==0)&&<UploadedFiles files={files} setFiles={setFiles} featureName={featureName}></UploadedFiles>}
+        {(files.inputFiles.length===0)&&<InputUpload featureName={featureName} files={files} setFiles={setFiles}></InputUpload>}
+        {(files.inputFiles.length!==0)&&<UploadedFiles files={files} setFiles={setFiles} featureName={featureName}></UploadedFiles>}
         </>
     )
 }

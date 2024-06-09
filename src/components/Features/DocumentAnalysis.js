@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Upload from "../FileUploading/Upload";
+import { useDocumentAnalysisFile } from "../../context/AppProvider";
 function DocumentAnalysis(){
-    const [files,setFiles]=useState([])
+    const {documentAnalysisFile:files,setDocumentAnalysisFile:setFiles}=useDocumentAnalysisFile()
     const documentAnalysis=()=>{
         
     }

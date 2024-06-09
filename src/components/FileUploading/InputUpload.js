@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import './InputUpload.css'
 function InputUpload({featureName,setFiles,files}){
     const changeInput=()=>{
-        setFiles([...document.getElementById(featureName+'-upload-input-files').files])
+        setFiles(prevFiles=>({...prevFiles,inputFiles:[...prevFiles.inputFiles,...document.getElementById(featureName+'-upload-input-files').files]}))
     }
     return(
         <>
