@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { activate_loader,alert_message, showAlert } from "./AlertLoader"
 import { width } from "@fortawesome/free-solid-svg-icons/fa0"
 import { useState } from "react"
+import * as XLSX from 'xlsx';
 function Home({token}){
     const base_url=useSelector((state)=>state.baseUrl.value)
     const userInfo=useSelector((state)=>state.userProfile)
@@ -88,9 +89,67 @@ function Home({token}){
         const newWin=window.open(`/display-pdf?file=${encodeURIComponent(url)}`, '_blank')
         newWin.focus()
     }
+    const handleExport = () => {
+        const ws_data = [
+        { "name": "John Doe", "age": 30, "city": "New York" },
+        { "name": "Anna Smith", "age": 25, "city": "London" },
+        { "name": "Peter Johnson", "age": 40, "city": "Paris" }
+        ];
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(ws_data);
+        const htmlTable = XLSX.utils.sheet_to_html(ws);
+        document.getElementById('excel-id').innerHTML=htmlTable;
+        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+        XLSX.writeFile(wb, "table extraction.xlsx");
+      };
+      const [excelData,setExcelData]=useState()
+    const displayExcel=()=>{
+        const ws_data = {
+            "0":{
+                "0": ['Seller', 'Adam', 'Adam', 'Adam', 'Harry', 'Harry', 'Harry', 'Harry', 'Steve', 'Steve'],
+                "1":['Order ID', '101', '104', '107','103','106', '108','109','102','105'],
+                "2":['Product', 'Apples', 'Apples','Bananas','Lemons','Lemons','Oranges','Bananas', 'Bananas', 'Lemons']
+            },
+            "1":{
+                "0":['Order ID', '101', '102', '103', '104', '105', '106', '107', '108', '109'],
+                "1":['Seller', 'Adam', 'Steve', 'Harry', 'Adam', 'Steve', 'Harry', 'Adam', 'Harry', 'Harry'],
+                "2":['Date', '1-Oct-18', '1-Oct-18', '2-Oct-18', '2-0ct-18', '2-0ct-18', '3-0ct-18', '4-Oct-18', '4-Oct-18', '5-Oct-18']
+            }    
+        }
+        console.log(Object.keys(ws_data))
+        const new_data={}
+        Object.keys(ws_data).map((key)=>{
+            Object.keys(ws_data[key]).map((innerKey,innerValue)=>{
+                ws_data[key][innerKey].map((k,v)=>{
+                    console.log(k)
+                })
+            })
+       })
+
+
+        setExcelData(ws_data)
+    }
 const [url_,setUrl]=useState()
     return(
         <>
+        <button id='createExcel' onClick={displayExcel}>Create Excel</button>
+        <button onClick={()=>{console.log(excelData)}}>exell</button>
+        <div id='display-excel'>
+                <h1>Table Display</h1>
+                {excelData && Object.keys(excelData).map((key) => (
+                    <table key={key} className="table">
+                        <tbody>
+                            {Object.keys(excelData[key]).map((innerKey) => (
+                                <tr key={innerKey}>
+                                    {excelData[key][innerKey].map((cell, index) => (
+                                        <td key={index}>{cell}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ))}
+            </div>
         <h1>lfk</h1>
         <embed id='pdf-content'  type="application/pdf" src={url_}>
         </embed>
@@ -106,12 +165,12 @@ const [url_,setUrl]=useState()
                 </div>
         </div>
         <button onClick={showPDF}>Click me{token}</button>
-        <input id='input_image' type='file' accept=".pdf" multiple></input>
+        <input id='input_image' type='file' accept=".xlsx" multiple></input>
         
         <button onClick={changeWindow}>
             new window
         </button>
-        <div id='pdf-id' style={{width:'400px',height:'800px'}}>
+        <div id='excel-id' style={{width:'400px',height:'800px'}}>
         </div>
 
         </>

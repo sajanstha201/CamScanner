@@ -15,5 +15,5 @@ export function showAlert(message, type) {
         }, 500);
     }, 3000);
 }
-
+export {NewLoader} from './NewLoader'
 export default {activate_loader,showAlert}

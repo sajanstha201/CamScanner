@@ -7,7 +7,7 @@ import open_eye from '../../static/images/open-eye.png'
 import { useSelector } from 'react-redux';
 import {activate_loader,showAlert} from '../AlertLoader/index'
 export function Register(){
-    const base_url=useSelector((state)=>state.baseUrl.value)
+    const base_url=useSelector((state)=>state.baseUrl.backend)
     const [userInfo,setUserInfo]=useState({'first_name':'','last_name':'','email':'','username':'','password':''})
     var [eyeStatus,setEyeStatus]=useState(true)
     const [isRegistered,setIsRegistered]=useState(false)

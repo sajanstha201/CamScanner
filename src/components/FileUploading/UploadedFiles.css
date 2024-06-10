@@ -53,7 +53,12 @@
     padding: 30px;
     border-radius: 10px;
     background-color: #ffffff;
-    filter: brightness(97%)
+    filter: brightness(97%);
+}
+.uploaded-inner-image-container_table_extraction img{
+    max-height: 100%;
+    max-width: 100%;
+    cursor: pointer; 
 }
 .uploaded_inner_container_table_extraction{
     position:relative;
@@ -67,6 +72,7 @@
     filter: brightness(97%);
     border-radius:10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    overflow:auto;
 }
 .cross-buttons{
     position:absolute;

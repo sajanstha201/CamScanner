@@ -6,7 +6,7 @@ import { PdfConversion, TableExtraction } from './components/Features';
 import Home from './components/Home'
 import { useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
-import { DisplayPdf } from './components/ShowResult';
+import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 function App() {
   const [token,setToken]=useState()
@@ -30,6 +30,7 @@ function App() {
                 <Route path='/pdf-conversion' element={<PdfConversion></PdfConversion>}></Route>
                 <Route path='/document-analysis' element={<DocumentAnalysis></DocumentAnalysis>}></Route>
                 <Route path='/display-pdf' element={<DisplayPdf></DisplayPdf>}></Route>
+                <Route path='/display-excel' element={<DisplayExcel></DisplayExcel>}></Route>
               </Routes>
           </div>
           <div className='side-navbar'>

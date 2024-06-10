@@ -2,10 +2,10 @@
     margin:auto;
     margin-top: 5%;
     background-color: #EAEAEA;
-    width:40%;
+    width:30%;
     height: 300px;
     border-radius: 20px;
-    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.1);
     background-color: #D9D9D9;
 }
 .upload-container input{

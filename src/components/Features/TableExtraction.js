@@ -2,30 +2,40 @@ import './TableExtraction.css'
 import Upload from '../FileUploading/Upload'
 import { useState } from 'react'
 import { useTableExtractionFile } from '../../context/AppProvider'
-import { activate_loader } from '../AlertLoader'
+import { activate_loader, showAlert } from '../AlertLoader'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
+import * as XLSX from 'xlsx';
+import ReactDOM from 'react-dom';
+import { NewLoader } from '../AlertLoader/NewLoader'
 export function TableExtraction(){
     const {tableExtractionFile:files,setTableExtractionFile:setFiles}=useTableExtractionFile()
     const userInfo=useSelector((state)=>state.userProfile)
-    const baseUrl=useSelector((state)=>state.baseUrl.value)
+    const baseUrl=useSelector((state)=>state.baseUrl.backend)
+    const frontendBaseUrl=useSelector((state)=>state.baseUrl.frontend)
     const tableExtraction=async ()=>{
         try{
             activate_loader(true);
             const imageFormData = new FormData();
             files.inputFiles.forEach(file => imageFormData.append('image', file));
+            const newWin=window.open(frontendBaseUrl+'blank');
             const response=await axios.post(baseUrl+'api/images/',imageFormData,{
                 headers:{ 'Authorization': userInfo.token }
-            })
-            /*
-            const respone2=await axios.get(baseUrl+'',{
-                Headers:{ 'Authorization': userInfo.token }
-            })
-            console.log(respone2)
-            */
+                })
+            const responseData=response.data.imagedata;
+            const tableData={};
+            responseData.forEach((value,index)=>tableData[index]=value);
+            const pdfBlob = new Blob([JSON.stringify(responseData)], { type: 'application/pdf' });
+            if(pdfBlob){
+                const urlObject = URL.createObjectURL(pdfBlob);
+                console.log('url',urlObject);
+                newWin.location.href=`/display-excel?file=${encodeURIComponent(urlObject)}`
+                newWin.focus();
+            }
         }
         catch(error){
             console.log(error)
+            showAlert(error,'red')
         }
         finally{
             activate_loader(false)

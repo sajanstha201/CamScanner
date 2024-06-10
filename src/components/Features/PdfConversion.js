@@ -11,12 +11,13 @@ export function PdfConversion() {
     //const [files,setFiles]=useState({inputFiles:[],result:'asfsld'})
     const [resultDetail, setResultDetail] = useState(null);
     const userProfile = useSelector((state) => state.userProfile);
-    const baseUrl = useSelector((state) => state.baseUrl).value;
+    const baseUrl = useSelector((state) => state.baseUrl.backend);
     const convertToPdf = async () => {
         activate_loader(true);
         const imageFormData = new FormData();
         files.inputFiles.forEach(file => imageFormData.append('images', file));
         try {
+            
             const response = await axios.post(baseUrl + 'api/scanned-files/', imageFormData, {
                 headers: { 'Authorization': userProfile.token }
             });

@@ -8,7 +8,7 @@ import { setIsLogin ,setUserInfo} from '../../state/UserInformation/ProfileSlice
 export function Login(){
     const user_profile=useSelector((state)=>state.userProfile)
     const dispatch=useDispatch()
-    const base_url=useSelector((state)=>state.baseUrl.value)
+    const base_url=useSelector((state)=>state.baseUrl.backend)
     const [userLoginInfo,setuserLoginInfo]=useState({'username':'','password':''})
     if(user_profile.isLogin){
         activate_loader(false);
