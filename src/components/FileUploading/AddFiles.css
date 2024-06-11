@@ -1,12 +1,12 @@
 .additional-files{
-    width:200px;
-    height:250px;
+    height:180px;
+    width: 127px;
     background-color: #ffffff;
     filter: brightness(90%);
     position: relative;
     border-radius: 5px;
     border: 2px solid black;
-    margin: 10px;
+    margin: 20px;
 }
 .additional-input-files{
     display: none;
