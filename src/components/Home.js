@@ -4,6 +4,8 @@ import { activate_loader,alert_message, showAlert } from "./AlertLoader"
 import { width } from "@fortawesome/free-solid-svg-icons/fa0"
 import { useState } from "react"
 import * as XLSX from 'xlsx';
+import { ContactUs } from "../webpage/ContactUs"
+import { Alert } from "react-bootstrap"
 function Home({token}){
     const base_url=useSelector((state)=>state.baseUrl.value)
     const userInfo=useSelector((state)=>state.userProfile)
@@ -132,47 +134,7 @@ function Home({token}){
 const [url_,setUrl]=useState()
     return(
         <>
-        <button id='createExcel' onClick={displayExcel}>Create Excel</button>
-        <button onClick={()=>{console.log(excelData)}}>exell</button>
-        <div id='display-excel'>
-                <h1>Table Display</h1>
-                {excelData && Object.keys(excelData).map((key) => (
-                    <table key={key} className="table">
-                        <tbody>
-                            {Object.keys(excelData[key]).map((innerKey) => (
-                                <tr key={innerKey}>
-                                    {excelData[key][innerKey].map((cell, index) => (
-                                        <td key={index}>{cell}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ))}
-            </div>
-        <h1>lfk</h1>
-        <embed id='pdf-content'  type="application/pdf" src={url_}>
-        </embed>
-        <div>
-            <div>
-                pdf conversion
-            </div>
-            <div>
-                table extraction
-            </div>
-            <div>
-                document analysis
-                </div>
-        </div>
-        <button onClick={showPDF}>Click me{token}</button>
-        <input id='input_image' type='file' accept=".xlsx" multiple></input>
-        
-        <button onClick={changeWindow}>
-            new window
-        </button>
-        <div id='excel-id' style={{width:'400px',height:'800px'}}>
-        </div>
-
+         <ContactUs></ContactUs>
         </>
     )
 }

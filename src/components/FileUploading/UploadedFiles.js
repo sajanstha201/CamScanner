@@ -25,9 +25,9 @@ function UploadedFiles({files,setFiles,featureName}){
     }
     return (
         <div id={featureName + 'uploaded-outer-container'} className='uploaded-outer-container'>
-            <div className={featureName==='pdf-conversion'?'uploaded-inner-container':'uploaded_inner_container_table_extraction'}>
+            <div className={featureName==='pdf-conversion'?'uploaded-inner-container':'uploaded-inner-container-table-extraction'}>
             {files.inputFiles.map((file, index) => (
-                <div key={index+ '-div'} className={featureName==='pdf-conversion'?'uploaded-inner-image-container':'uploaded-inner-image-container_table_extraction'} id={index+ '-div'} 
+                <div key={index+ '-div'} className={featureName==='pdf-conversion'?'uploaded-inner-image-container':'uploaded-inner-image-container-table-extraction'} id={index+ '-div'} 
                 draggable
                 onDragStart={(e)=>{handleDragStart(e,index)}}
                 onDragOver={(e)=>{e.preventDefault()}}

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import '../Login-Register/Login.css'
+import './Login.css'
 import { Link ,Navigate} from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import {activate_loader,showAlert} from '../AlertLoader/index'
+import {activate_loader,showAlert} from '../../components/AlertLoader/index'
 import { setIsLogin ,setUserInfo} from '../../state/UserInformation/ProfileSlice';
 export function Login(){
     const user_profile=useSelector((state)=>state.userProfile)

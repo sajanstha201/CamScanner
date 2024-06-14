@@ -8,6 +8,7 @@ import { connect, useSelector } from 'react-redux'
 import * as XLSX from 'xlsx';
 import ReactDOM from 'react-dom';
 import { NewLoader } from '../AlertLoader/NewLoader'
+import { Button } from 'react-bootstrap'
 export function TableExtraction(){
     const {tableExtractionFile:files,setTableExtractionFile:setFiles}=useTableExtractionFile()
     const userInfo=useSelector((state)=>state.userProfile)
@@ -45,7 +46,10 @@ export function TableExtraction(){
         <>
          <h1>Table extraction</h1>
        <Upload featureName={'table-extraction'} files={files} setFiles={setFiles}></Upload>
-       {files.inputFiles.length!=0&&<div id='table-extraction-submit-button'><div onClick={tableExtraction} > Extract Table</div></div>}
+       {files.inputFiles.length!=0&&
+        <div id='table-extraction-submit-button'>
+            <Button variant='success' size='lg' onClick={tableExtraction} > Extract Table</Button>
+        </div>}
         </>
     )
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import closed_eye from '../../static/images/closed-eye.png'
 import open_eye from '../../static/images/open-eye.png'
 import { useSelector } from 'react-redux';
-import {activate_loader,showAlert} from '../AlertLoader/index'
+import {activate_loader,showAlert} from '../../components/AlertLoader/index'
 export function Register(){
     const base_url=useSelector((state)=>state.baseUrl.backend)
     const [userInfo,setUserInfo]=useState({'first_name':'','last_name':'','email':'','username':'','password':''})

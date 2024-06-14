@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import { useState,useEffect } from "react";
 import * as XLSX from 'xlsx'
+import { Card ,Button} from "react-bootstrap";
 export const DisplayExcel=()=>{
     const [excelData,setExcelData]=useState()
     const loc=useLocation();
@@ -39,25 +40,33 @@ export const DisplayExcel=()=>{
     return (
         <>
         <div id='display-excel'>
-            <div>
+            <Card style={{border:'none'}}>
+                <Card.Title>
                 <h1>Extracted Tables</h1>
-                <button onClick={downloadExcelFile}>Download</button>
-            </div>
-            <div>
+                <Button onClick={downloadExcelFile} variant="success">Download</Button>
+                </Card.Title>
+                <Card.Body className="d-flex flex-column align-items-center">
                 {excelData && Object.keys(excelData).map((key) => (
-                    <Table key={key} striped bordered hover>
+                    <fieldset style={{width:'60%'}}>
+                        <legend>Table {key}</legend>
+                    <Table key={key} striped bordered hover className="m-5" >
+                            <thead>
+                            </thead>
                         <tbody>
                             {Object.keys(excelData[key]).map((innerKey) => (
                                 <tr key={innerKey}>
                                     {excelData[key][innerKey].map((cell, index) => (
-                                        <td key={index}>{cell}</td>
+                                        <td key={index} style={{maxWidth:'100px'}}>{cell}</td>
                                     ))}
                                 </tr>
                             ))}
                         </tbody>
                     </Table>
-                ))}            
-            </div>
+                    </fieldset>
+
+                ))}  
+                </Card.Body>
+            </Card>
         </div>
         </>
     );
