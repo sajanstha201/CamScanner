@@ -40,11 +40,12 @@ export const UserNavbar=()=>{
                 <Navbar.Collapse>
                 <Nav className="mr-auto d-flex flex-column w-100 align-items-center">
                         <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
-                        <Nav.Link as={Link} to="/history">History</Nav.Link>
+                        <Nav.Link as={Link} to="/user-history">My History</Nav.Link>
+                        <Nav.Link as={Link} to="/settings">Premium Features</Nav.Link>
+                        <Nav.Link as={Link} to="/settings">Notification</Nav.Link>
                         <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
-                        <Nav.Link as={Link} to="/about">About Us</Nav.Link>
-                        <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
-                        <Nav.Link as={Link} to="/faq">FAQ</Nav.Link>
+                        <Nav.Link as={Link} to="/user-history">Support</Nav.Link>
+                        <Nav.Link as={Link} to="/logout">Log Out</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

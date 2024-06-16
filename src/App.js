@@ -9,6 +9,7 @@ import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage} from './webpage/BlankPage/BlankPage'
+import { ContactUs } from './webpage/ContactUs';
 function App() {
   const [token,setToken]=useState()
   const location=useLocation()
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/display-pdf' element={<DisplayPdf></DisplayPdf>}></Route>
                 <Route path='/display-excel' element={<DisplayExcel></DisplayExcel>}></Route>
                 <Route path='/blank' element={<BlankPage></BlankPage>}></Route>
+                <Route path='/contact-us' element={<ContactUs></ContactUs>}></Route>
               </Routes>
           </div>
         </div>

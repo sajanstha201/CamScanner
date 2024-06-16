@@ -29,8 +29,15 @@ export const Navbar=()=>{
             <NavbarB.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/pdf-conversion">Pdf Conversion</Nav.Link>
-                    <Nav.Link as={Link} to="/table-extraction">Table Extraction</Nav.Link>
-                    <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
+                    {userInfo.isLogin&&(<>
+                        <Nav.Link as={Link} to="/table-extraction">Table Extraction</Nav.Link>
+                        <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
+                    </>
+                    )}
+                    <Nav.Link as={Link} to="/premium">Premium</Nav.Link>
+                    <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
+                    <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
+                    <Nav.Link as={Link} to="/download">Download</Nav.Link>
                 </Nav>
                 {!userInfo.isLogin && (
                     <Nav>
@@ -38,7 +45,7 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                     </Nav>
                 )}
-                {userInfo.isLogin && (<UserNavbar></UserNavbar>)}
+                {!userInfo.isLogin && (<UserNavbar></UserNavbar>)}
             </NavbarB.Collapse>
         </Container>
     </NavbarB>
