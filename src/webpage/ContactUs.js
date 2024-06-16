@@ -35,7 +35,7 @@ function clearErrors() {
         <h2 class="text-7xl font-bold mb-4 tracking-wide">Contact</h2>
         <p class="pt-4 tracking-normal text-xl font-semibold">Contact us to report a problem, <br></br> clarify any doubts about us, <br></br>or  just find out more.</p>
         </div>
-        <div class=" border-grey border rounded-md p-8  mt-16 " id="box">
+        <div class=" border-grey border rounded-lg p-8  mt-16 shadow" id="box">
                     <form id="contactForm" class="space-y-4 flex flex-col " onSubmit='submitContactUsForm '>
                         <div>
                             <label for="name" class="block text-sm font-medium mt-8">Your Name</label>

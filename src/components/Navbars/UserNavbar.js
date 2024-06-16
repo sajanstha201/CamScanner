@@ -4,6 +4,8 @@ import './UserNavbar.css'
 import { Link } from 'react-router-dom';
 import { Nav,Navbar,Offcanvas} from 'react-bootstrap';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUser, faHistory, faCog, faBell, faQuestionCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 export const UserNavbar=()=>{
     const userInfo=useSelector((state)=>state.user_profile)
     const [showUserOffCanvas,setShowUserOffCanvas]=useState(false)
@@ -20,7 +22,7 @@ export const UserNavbar=()=>{
               />
           </Nav.Link>
       </Nav>
-      <Offcanvas show={showUserOffCanvas} onHide={()=>setShowUserOffCanvas(false)} placement='end'>
+      <Offcanvas show={showUserOffCanvas} onHide={()=>setShowUserOffCanvas(false)} placement='end' style={{width:'250px'}}>
           <Offcanvas.Header closeButton className='mb-4'>
             <Offcanvas.Title >
                 <Nav.Link>
@@ -38,14 +40,25 @@ export const UserNavbar=()=>{
             <Navbar>
                 <Navbar.Toggle></Navbar.Toggle>
                 <Navbar.Collapse>
-                <Nav className="mr-auto d-flex flex-column w-100 align-items-center">
-                        <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
-                        <Nav.Link as={Link} to="/user-history">My History</Nav.Link>
-                        <Nav.Link as={Link} to="/settings">Premium Features</Nav.Link>
-                        <Nav.Link as={Link} to="/settings">Notification</Nav.Link>
-                        <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
-                        <Nav.Link as={Link} to="/user-history">Support</Nav.Link>
-                        <Nav.Link as={Link} to="/logout">Log Out</Nav.Link>
+                <Nav className="mr-auto d-flex flex-column w-100 ">
+                    <Nav.Link as={Link} to="/user/profile">
+                        <FontAwesomeIcon icon={faUser} /> My Profile
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/user-history">
+                        <FontAwesomeIcon icon={faHistory} /> My History
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/settings">
+                        <FontAwesomeIcon icon={faBell} /> Notification
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/settings">
+                        <FontAwesomeIcon icon={faCog} /> Settings
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/user-history">
+                        <FontAwesomeIcon icon={faQuestionCircle} /> Support
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/logout">
+                        <FontAwesomeIcon icon={faSignOutAlt} /> Log Out
+                    </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

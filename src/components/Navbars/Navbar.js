@@ -3,6 +3,8 @@ import logo_image from '../../static/images/logo.jpg'
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {UserNavbar} from './UserNavbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBell} from '@fortawesome/free-solid-svg-icons';
 import { Navbar as NavbarB,Nav,NavDropdown, Container, Offcanvas } from 'react-bootstrap';
 export const Navbar=()=>{
     const userInfo=useSelector((state)=>state.userProfile)
@@ -16,7 +18,7 @@ export const Navbar=()=>{
     return(
     <NavbarB bg="dark" expand="lg" className="bg-body-tertiary shadow-sm" style={{marginBottom:'15px'}}>
         <Container  fluid>
-            <NavbarB.Brand as={Link} to="/" style={{marginRight:'50px'}}>
+            <NavbarB.Brand as={Link} to="/home" style={{marginRight:'50px'}}>
                 <img
                     src={logo_image}
                     alt="Logo"
@@ -45,7 +47,14 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                     </Nav>
                 )}
-                {!userInfo.isLogin && (<UserNavbar></UserNavbar>)}
+                {userInfo.isLogin && (
+                    <>
+                    <Nav.Link as={Link} to="/settings" className='m-2'>
+                        <FontAwesomeIcon icon={faBell} size='1x'/> 
+                    </Nav.Link>
+                    <UserNavbar></UserNavbar>
+                    </>
+                    )}
             </NavbarB.Collapse>
         </Container>
     </NavbarB>

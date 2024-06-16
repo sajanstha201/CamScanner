@@ -3,13 +3,14 @@ import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
 import { BrowserRouter as Router,Route,Routes, useLocation } from 'react-router-dom'
 import {Login,Register} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
-import Home from './components/Home'
+import {Home} from './webpage'
 import { useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage} from './webpage/BlankPage/BlankPage'
-import { ContactUs } from './webpage/ContactUs';
+import { ContactUs,AboutUs } from './webpage';
+import { Profile ,History} from './components/User';
 function App() {
   const [token,setToken]=useState()
   const location=useLocation()
@@ -36,6 +37,10 @@ function App() {
                 <Route path='/display-excel' element={<DisplayExcel></DisplayExcel>}></Route>
                 <Route path='/blank' element={<BlankPage></BlankPage>}></Route>
                 <Route path='/contact-us' element={<ContactUs></ContactUs>}></Route>
+                <Route path='/about-us' element={<AboutUs></AboutUs>}></Route>
+                <Route path='/user/profile' element={<Profile></Profile>}></Route>
+                <Route path='/user/history' element={<History></History>}></Route>
+                <Route path='/home' element={<Home></Home>}></Route>
               </Routes>
           </div>
         </div>

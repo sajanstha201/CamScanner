@@ -134,7 +134,7 @@ function Home({token}){
 const [url_,setUrl]=useState()
     return(
         <>
-         <ContactUs></ContactUs>
+        <h1>This is Home Page</h1>
         </>
     )
 }
