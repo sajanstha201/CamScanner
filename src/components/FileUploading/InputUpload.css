@@ -15,12 +15,17 @@
     height:60%;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     border-radius: 8px;
     box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.1);
     background-color: #D9D9D9;
 }
-.upload-container input{
+.upload-container:hover{
+    width:52%;
+    height: 62%;
+}
+.upload-outer-container input{
     display: none;
 }
 .upload-label p{

@@ -13,34 +13,32 @@ export function Login(){
     if(user_profile.isLogin){
         activate_loader(false);
         showAlert('Successfully login','green')
-        return <Navigate to='/'></Navigate>
+        return <Navigate to='/home'></Navigate>
     }
     const handleChange=(event)=>{
         setuserLoginInfo({...userLoginInfo,[event.target.name]:event.target.value})
     }
     const submitForm=async()=>{
-        let csrf_token
         activate_loader(true)
-        await axios.get(base_url+'api/get-csrf-token/')
-        .then((response)=>{
-            csrf_token=response.data.csrf_token
-        })
-        .catch((error)=>{
-            showAlert(error,'red')
-        })
+        try{
+        const response=await axios.get(base_url+'api/get-csrf-token/')
+        const csrf_token=response.data.csrf_token
         await axios.post(base_url+'api/login/',userLoginInfo)
         .then((response)=>{
             dispatch(setUserInfo(response.data))
             dispatch(setIsLogin(true))
         })
-        .catch((error)=>{
-            showAlert('Incorrect Username or Password','red')
+        }
+        catch(error){
+            showAlert(error,'red')
+        }
+        finally{
             activate_loader(false)
-        })
+        }
     }
     return(
         <div className="login-container">
-            <div className="login-form" >
+            <div className="login-form"  >
                 <h2>Login</h2>
                 <label htmlFor="email">Username</label>
                 <input id='username' name='username' type='text' onChange={handleChange} required></input>

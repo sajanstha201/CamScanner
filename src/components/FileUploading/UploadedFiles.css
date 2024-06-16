@@ -53,6 +53,7 @@
     border-radius: 10px;
     background-color: #ffffff;
     filter: brightness(97%);
+    height: 100%;
 }
 .uploaded-inner-image-container-table-extraction img{
     max-height: 100%;
@@ -77,10 +78,11 @@
     position:absolute;
     right:5px;
     top:5px;
-    height:20px;
-    width:20px;
-    background-color:lightcoral;
-    border-radius:10px;
+    height:15px;
+    width:15px;
+    background-color:red;
+    filter: brightness(90%);
+    border-radius:20px;
     content:'x';
     cursor:pointer;
     border:2px solid black;
@@ -90,7 +92,14 @@
     font-family:Arial, sans-serif;
     line-height:1;
     font-size:10px;
-
+}
+.cross-buttons::after{
+    content: 'x';
+    font-size: 8px;
+}
+.cross-buttons:hover{
+    height:16px;
+    width: 16px;
 }
 .indexing-div{
     position:absolute;

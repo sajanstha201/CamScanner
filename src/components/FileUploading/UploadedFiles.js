@@ -2,13 +2,15 @@ import './UploadedFiles.css'
 import {useState} from 'react';
 import AddFiles from './AddFiles';
 import { height, width } from '@fortawesome/free-solid-svg-icons/fa0';
+import { Result } from 'postcss';
 function UploadedFiles({files,setFiles,featureName}){
     const [position, setPosition] = useState(0);
     const [scrollAmout,setScrollAmount]=useState(0)
     const deleteImage=(e)=>{
         const image=e.target.parentNode;
         const imageId=image.id.replace('-div','');
-        setFiles(prevFiles=>({...prevFiles,inputFiles:prevFiles.inputFiles.filter((_,index)=>index!==parseInt(imageId))}))
+        if(featureName=='pdf-conversion') setFiles(prevFiles=>({...prevFiles,inputFiles:prevFiles.inputFiles.filter((_,index)=>index!==parseInt(imageId))}))
+        else setFiles({inputFiles:[],result:[]})
     }
     const handleDrop=(e,newIndex)=>{
         e.preventDefault();

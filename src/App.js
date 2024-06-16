@@ -27,7 +27,6 @@ function App() {
           <div className='whole-body-inner'>
           {(!showResult&&!blankPageActivate)&&<Navbar></Navbar>}
               <Routes>
-                <Route path='' element={<Home token={token}/>}></Route>
                 <Route path='/login' element={<Login setToken={setToken}/>}></Route>
                 <Route path='/register' element={<Register/>}></Route>
                 <Route path='/table-extraction' element={<TableExtraction></TableExtraction>}></Route>

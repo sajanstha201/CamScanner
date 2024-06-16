@@ -36,7 +36,6 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
                     </>
                     )}
-                    <Nav.Link as={Link} to="/premium">Premium</Nav.Link>
                     <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
                     <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
                     <Nav.Link as={Link} to="/download">Download</Nav.Link>

@@ -6,13 +6,12 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { activate_loader } from "../AlertLoader";
 import mammoth from "mammoth";
+import { file } from "jszip";
 function DocumentAnalysis(){
     const baseUrl=useSelector((state)=>state.baseUrl.backend);
     const {documentAnalysisFile:files,setDocumentAnalysisFile:setFiles}=useDocumentAnalysisFile();
     const userInfo=useSelector((state)=>state.userProfile);
     const frontendBaseUrl=useSelector((state)=>state.baseUrl.frontend)
-    const [urlObject,setUrlObject]=useState()
-    const [docData,setDocData]=useState()
     const documentAnalysis=async ()=>{
         try{
             activate_loader(true)
@@ -22,9 +21,11 @@ function DocumentAnalysis(){
             const response = await axios.post(baseUrl + 'api/convert-doc/', imageData, {
                 headers: {
                     'Authorization': userInfo.token,
-                }
+                },
+                responseType:'arraybuffer'
             });
-            setDocData(response.data)
+            console.log(response.data)
+            setFiles(prevData=>({...prevData,result:[response.data]}))
         }
         catch(error){
             console.log(error)
@@ -34,13 +35,14 @@ function DocumentAnalysis(){
         }
     }
     const downloadDoc=()=>{
-        const blob = new Blob([docData], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        console.log(files)
+        const blob = new Blob([files.result[0]], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
         const a = document.createElement('a');
         a.style.display = 'none';
         document.body.appendChild(a);
         const url = window.URL.createObjectURL(blob);
         a.href = url;
-        a.download ='donload.docx';
+        a.download ='download.docx';
         a.click();
         window.URL.revokeObjectURL(url);
     }
@@ -48,10 +50,8 @@ function DocumentAnalysis(){
         <>
             <h1>Document Analysis</h1>
             <Upload featureName={'document-analysis'} files={files} setFiles={setFiles}></Upload>
-            {files.inputFiles.length!==0&&<Button variant="success" size='lg' onClick={documentAnalysis} className="mt-4">Analyze</Button>}
-            <Button onClick={downloadDoc}>
-                <a href={urlObject} download='download.docx'>Download</a>
-            </Button>
+            {(files.result.length===0&&files.inputFiles.length!==0)&&<Button variant="success" size='lg' onClick={documentAnalysis} className="mt-4">Analyze</Button>}
+            {files.result.length!==0&&<Button onClick={downloadDoc} size='lg' className="mt-4">Download</Button>}
         </>
     );
 }
