@@ -3,6 +3,9 @@ import { saveAs } from 'file-saver';
 import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { showAlert } from '../components/AlertLoader';
+import { MdAddCall } from "react-icons/md";
+import { IoLocationSharp } from "react-icons/io5";import { MdOutlineMail } from "react-icons/md";
+
 export const ContactUs = () => {
   const submitContactUsForm=(event)=>{
     event.preventDefault();
@@ -42,17 +45,18 @@ function clearErrors() {
           </div>  
           {/* map  */}
          <div className=' mt-7  border rounded-xl'>
-              <h1 className='text-lg font-extrabold'>Call Us</h1>
-              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
-                  <label className='font-bold text-black '>Location:  </label>
+              <h1 className='text-lg font-extrabold mb-3'>Call Us</h1>
+              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+                  <IoLocationSharp className='h-6 w-6'/>
                 <p className='hover:underline'>Sankhamul,kathmandu</p>
               </div>
-              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
-              <label className='font-bold text-black '>Number:</label>
+              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+              
+               <MdAddCall className='h-6 w-6'/>
                 <p className='hover:underline'>+977 9745384280</p>
               </div>
-              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
-              <label className='font-bold text-black '>Email:</label>
+              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+                 <MdOutlineMail className='h-6 w-6'/>
                 <p className='hover:underline'>xyz@gmail.com</p>
               </div>
 
