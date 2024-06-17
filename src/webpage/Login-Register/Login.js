@@ -13,7 +13,7 @@ export function Login(){
     if(user_profile.isLogin){
         activate_loader(false);
         showAlert('Successfully login','green')
-        return <Navigate to='/home'></Navigate>
+        return <Navigate to='/'></Navigate>
     }
     const handleChange=(event)=>{
         setuserLoginInfo({...userLoginInfo,[event.target.name]:event.target.value})

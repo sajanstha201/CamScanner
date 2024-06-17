@@ -1,55 +1,39 @@
-import React from 'react';
-import { saveAs } from 'file-saver';
-import PizZip from 'pizzip';
-import Docxtemplater from 'docxtemplater';
+import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 export const AboutUs = () => {
+  const [mapLoaded, setMapLoaded] = useState(false);
 
-  const displayDoc = () => {
-    const inputFiles = document.getElementById('input-doc').files;
-    if (inputFiles.length === 0) {
-      alert("Please select a file.");
-      return;
-    }
+  const defaultCenter = {
+    lat: 27.681505372996934,
+    lng: 85.32804964028425
+  };
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const arrayBuffer = event.target.result;
-      try {
-        const zip = new PizZip(arrayBuffer);
-        const doc = new Docxtemplater(zip, {
-          paragraphLoop: true,
-          linebreaks: true,
-        });
-        doc.setData({
-          textContent: "This is the new content inserted into the document.",
-        });
-        doc.render();
-        const blob = doc.getZip().generate({
-          type: 'blob',
-          mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        });
+  const mapStyles = {
+    height: '400px',
+    width: '400px'
+  };
 
-        saveAs(blob, 'document.docx');
-      } catch (error) {
-        console.error("Error processing the document:", error);
-      }
-    };
-
-    reader.onerror = (error) => {
-      console.log("Error reading file:", error);
-    };
-
-    reader.readAsArrayBuffer(inputFiles[0]);
+  const handleLoad = () => {
+    setMapLoaded(true);
+    console.log('Map loaded successfully');
   };
 
   return (
     <>
-      <h1>This is contact us page</h1>
-      <input type='file' accept=".docx,.doc" id='input-doc' />
-      <button onClick={displayDoc}>Display DOCX</button>
-      <div id='display-doc'></div>
+      <h1>This is the About Us page</h1>
+      <div>
+        <LoadScript googleMapsApiKey="AIzaSyDR-Piy7y9bIfz9HzE_dN_TAXJbM9UtA24">
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={15}
+            center={defaultCenter}
+            onLoad={handleLoad}
+          >
+            {mapLoaded && <Marker position={defaultCenter} />}
+          </GoogleMap>
+        </LoadScript>
+      </div>
     </>
   );
 };
-

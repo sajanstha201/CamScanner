@@ -45,7 +45,7 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                     </Nav>
                 )}
-                {!userInfo.isLogin && (
+                {userInfo.isLogin && (
                     <>
                     <Nav.Link as={Link} to="/settings" className='m-2'>
                         <FontAwesomeIcon icon={faBell} size='1x'/> 
