@@ -35,9 +35,29 @@ function clearErrors() {
         <h2 className="text-7xl font-bold mb-4 tracking-wide">Contact</h2>
         <p className="pt-4 tracking-normal text-xl font-semibold">
             Contact us to report a problem, <br></br> 
-            clarify any doubts about us, <br></br>
-            or  just find out more.
+            clarify any doubts about us <br></br>
             </p>
+          <div id="map" className='h-56 w-[400px] bg-black mt-12'>
+
+          </div>  
+          {/* map  */}
+         <div className=' mt-7  border rounded-xl'>
+              <h1 className='text-lg font-extrabold'>Call Us</h1>
+              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
+                  <label className='font-bold text-black '>Location:  </label>
+                <p className='hover:underline'>Sankhamul,kathmandu</p>
+              </div>
+              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
+              <label className='font-bold text-black '>Number:</label>
+                <p className='hover:underline'>+977 9745384280</p>
+              </div>
+              <div className='text-[#3B82F6] text-sm flex px-3 gap-2'>
+              <label className='font-bold text-black '>Email:</label>
+                <p className='hover:underline'>xyz@gmail.com</p>
+              </div>
+
+              
+         </div>
         </div>
         <div className=" border-grey border rounded-lg p-8  mt-16 shadow" id="box">
             <form id="contactForm" className="space-y-4 flex flex-col " onSubmit={submitContactUsForm}>
