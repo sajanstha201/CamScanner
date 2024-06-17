@@ -20,7 +20,6 @@ function App() {
   const location=useLocation()
   const showResult=location.pathname.startsWith('/display')
   const blankPageActivate=location.pathname.startsWith('/blank')
-  const noPageFound=location.pathname.startsWith('/no-page-found')
   const isMobile=useMediaQuery({query:'(max-width: 767px)'})
   const userInfo=useSelector((state)=>state.userProfile)
   return (
@@ -31,7 +30,7 @@ function App() {
       </div>
         <div className='whole-body-outer'>
           <div className='whole-body-inner'>
-          {(!showResult&&!blankPageActivate&&!noPageFound)&&<Navbar></Navbar>}
+          {(!showResult&&!blankPageActivate)&&<Navbar></Navbar>}
           <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/login' element={<Login/>}/>
@@ -52,7 +51,7 @@ function App() {
                 <Route path="*" element={<NoPageFound/>} />
           </Routes>
           </div>
-          {(!showResult&&!blankPageActivate&&!noPageFound)&&<Footer/>}
+          {(!showResult&&!blankPageActivate)&&<Footer/>}
         </div>
 
 
