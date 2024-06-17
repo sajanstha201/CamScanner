@@ -102,8 +102,9 @@
 }
 .whole-body-outer{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .whole-body-inner{
   width: 100%;
+  min-height: 70vh;
 }

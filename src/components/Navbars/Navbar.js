@@ -9,7 +9,6 @@ import { Navbar as NavbarB,Nav,NavDropdown, Container, Offcanvas } from 'react-b
 export const Navbar=()=>{
     const userInfo=useSelector((state)=>state.userProfile)
     const loc=useLocation()
-    const [userNavbarIsOpen,setUserNavbarIsOpen]=useState(true)
     const path=['/login','/register']
     const isactive=path.includes(loc.pathname)
     if(isactive){
@@ -18,7 +17,7 @@ export const Navbar=()=>{
     return(
     <NavbarB bg="dark" expand="lg" className="bg-body-tertiary shadow-sm" style={{marginBottom:'15px'}}>
         <Container  fluid>
-            <NavbarB.Brand as={Link} to="/home" style={{marginRight:'50px'}}>
+            <NavbarB.Brand as={Link} to="/" style={{marginRight:'50px'}}>
                 <img
                     src={logo_image}
                     alt="Logo"
@@ -46,7 +45,7 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                     </Nav>
                 )}
-                {userInfo.isLogin && (
+                {!userInfo.isLogin && (
                     <>
                     <Nav.Link as={Link} to="/settings" className='m-2'>
                         <FontAwesomeIcon icon={faBell} size='1x'/> 
