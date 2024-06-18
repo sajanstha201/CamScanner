@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {UserNavbar} from './UserNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faBell} from '@fortawesome/free-solid-svg-icons';
+import { faBell, faInfoCircle, faEnvelope, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Navbar as NavbarB,Nav,Container } from 'react-bootstrap';
 import { AiOutlineFilePdf, AiOutlineTable, AiOutlineFileText } from 'react-icons/ai';
 import { NavItemWithIcon } from './NavItemWithIcon';
@@ -30,15 +30,15 @@ export const Navbar=()=>{
             <NavbarB.Toggle aria-controls="basic-navbar-nav" />
             <NavbarB.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <NavItemWithIcon to="/pdf-conversion" icon={<AiOutlineFilePdf/>} currentPath={loc}>Pdf Conversion</NavItemWithIcon>
+                    <NavItemWithIcon to={'/pdf-conversion'} icon={<AiOutlineFilePdf/>} currentPath={loc}>Pdf Conversion</NavItemWithIcon>
                     {userInfo.isLogin&&(<>
-                        <Nav.Link as={Link} to="/table-extraction">Table Extraction</Nav.Link>
-                        <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
+                        <NavItemWithIcon to={'/table-extraction'} icon={<AiOutlineTable/>} currentPath={loc}>Pdf Conversion</NavItemWithIcon>
+                        <NavItemWithIcon to={'/document-analysis'} icon={<AiOutlineFileText/>} currentPath={loc}>Pdf Conversion</NavItemWithIcon>
                     </>
                     )}
-                    <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
-                    <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
-                    <Nav.Link as={Link} to="/download">Download</Nav.Link>
+            <NavItemWithIcon to={'/about-us'} icon={<FontAwesomeIcon icon={faInfoCircle} />} currentPath={loc}>About Us</NavItemWithIcon>
+            <NavItemWithIcon to={'/contact-us'} icon={<FontAwesomeIcon icon={faEnvelope} />} currentPath={loc}>Contact Us</NavItemWithIcon>
+            <NavItemWithIcon to={'/download'} icon={<FontAwesomeIcon icon={faDownload} />} currentPath={loc}>Download</NavItemWithIcon>
                 </Nav>
                 {!userInfo.isLogin && (
                     <Nav>

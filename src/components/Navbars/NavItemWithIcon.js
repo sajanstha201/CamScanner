@@ -1,13 +1,12 @@
-import { Nav } from "react-bootstrap"
-
+import { Nav} from "react-bootstrap"
+import { Link } from "react-router-dom"
 export const NavItemWithIcon=({to,icon,currentPath,children})=>{
     return(
-        <Nav.Link to={to} className={currentPath==to?'activate':''}>
+        <Nav.Link as={Link} to={to} className={currentPath==to?'bg-red':''}>
             <div className="flex flex-col items-center">
-            <span>{icon}</span>
+            <span className="h-5">{icon}</span>
             {children}
             </div>
-
         </Nav.Link>
     )
 }
