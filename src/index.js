@@ -9,7 +9,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AppProvider } from './context/AppProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
     <Router>
     <AppProvider>
@@ -17,7 +16,6 @@ root.render(
     </AppProvider>
     </Router> 
     </Provider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import logo_image from '../../static/images/logo.jpg'
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {UserNavbar} from './UserNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
-import { Navbar as NavbarB,Nav,NavDropdown, Container, Offcanvas } from 'react-bootstrap';
+import { Navbar as NavbarB,Nav,Container } from 'react-bootstrap';
+import { AiOutlineFilePdf, AiOutlineTable, AiOutlineFileText } from 'react-icons/ai';
+import { NavItemWithIcon } from './NavItemWithIcon';
 export const Navbar=()=>{
     const userInfo=useSelector((state)=>state.userProfile)
     const loc=useLocation()
@@ -29,7 +30,7 @@ export const Navbar=()=>{
             <NavbarB.Toggle aria-controls="basic-navbar-nav" />
             <NavbarB.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/pdf-conversion">Pdf Conversion</Nav.Link>
+                    <NavItemWithIcon to="/pdf-conversion" icon={<AiOutlineFilePdf/>} currentPath={loc}>Pdf Conversion</NavItemWithIcon>
                     {userInfo.isLogin&&(<>
                         <Nav.Link as={Link} to="/table-extraction">Table Extraction</Nav.Link>
                         <Nav.Link as={Link} to="/document-analysis">Document Analysis</Nav.Link>
@@ -47,7 +48,7 @@ export const Navbar=()=>{
                 )}
                 {userInfo.isLogin && (
                     <>
-                    <Nav.Link as={Link} to="/settings" className='m-2'>
+                    <Nav.Link as={Link} to="/user/notification" className='m-2'>
                         <FontAwesomeIcon icon={faBell} size='1x'/> 
                     </Nav.Link>
                     <UserNavbar></UserNavbar>

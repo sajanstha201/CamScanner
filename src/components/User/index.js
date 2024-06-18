@@ -1,2 +1,5 @@
 export {Profile} from './Profile'
 export {History} from './History'
+export {Notification} from './Notification'
+export {Setting} from './Setting'
+export {Support} from './Support'

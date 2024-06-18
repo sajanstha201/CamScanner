@@ -1,12 +1,25 @@
 import React from 'react';
-import { saveAs } from 'file-saver';
-import PizZip from 'pizzip';
-import Docxtemplater from 'docxtemplater';
-import { showAlert } from '../components/AlertLoader';
 import { MdAddCall } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";import { MdOutlineMail } from "react-icons/md";
-
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useState } from 'react';
 export const ContactUs = () => {
+    const [mapLoaded, setMapLoaded] = useState(false);
+
+    const defaultCenter = {
+      lat: 27.681505372996934,
+      lng: 85.32804964028425
+    };
+  
+    const mapStyles = {
+      height: '400px',
+      width: '400px'
+    };
+  
+    const handleLoad = () => {
+      setMapLoaded(true);
+      console.log('Map loaded successfully');
+    };
   const submitContactUsForm=(event)=>{
     event.preventDefault();
     clearErrors();
@@ -33,29 +46,32 @@ function clearErrors() {
     });
 }
   return (
-<div className="bg-100 flex lg:flex-row flex-col  items-center justify-center lg:gap-40  md:gap-2 overflow-hidden">
-    <div className="bg-white flex  flex-col  rounded-lg  ">
-        <h2 className="text-7xl font-bold mb-4 tracking-wide">Contact</h2>
-        <p className="pt-4 tracking-normal text-xl font-semibold">
-            Contact us to report a problem, <br></br> 
-            clarify any doubts about us <br></br>
-            </p>
-          <div id="map" className='h-56 w-[400px] bg-black mt-12'>
-
-          </div>  
-          {/* map  */}
-         <div className=' mt-7  border rounded-xl'>
-              <h1 className='text-lg font-extrabold mb-3'>Call Us</h1>
-              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+<div className="bg-100 flex lg:flex-row flex-col  items-center justify-center lg:gap-60  md:gap-2 overflow-hidden ">
+    <div className="bg-white flex  flex-col  rounded-lg justify-center align-center">
+        <h2 className="text-3xl font-bold mb-4 tracking-wide mt-16">Contact Us</h2>
+          <div id="map" className='mt-16 '>
+            <LoadScript googleMapsApiKey="AIzaSyDR-Piy7y9bIfz9HzE_dN_TAXJbM9UtA24">
+            <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={15}
+                center={defaultCenter}
+                onLoad={handleLoad}
+            >
+                {mapLoaded && <Marker position={defaultCenter} />}
+            </GoogleMap>
+            </LoadScript>
+        </div>  
+         <div className=' mt-7 '>
+              <div className=' text-sm flex px-5 gap-4'>
                   <IoLocationSharp className='h-6 w-6'/>
                 <p className='hover:underline'>Sankhamul,kathmandu</p>
               </div>
-              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+              <div className=' text-sm flex px-5 gap-4'>
               
                <MdAddCall className='h-6 w-6'/>
                 <p className='hover:underline'>+977 9745384280</p>
               </div>
-              <div className='text-[#3B82F6] text-sm flex px-5 gap-4'>
+              <div className=' text-sm flex px-5 gap-4'>
                  <MdOutlineMail className='h-6 w-6'/>
                 <p className='hover:underline'>xyz@gmail.com</p>
               </div>
@@ -63,7 +79,13 @@ function clearErrors() {
               
          </div>
         </div>
-        <div className=" border-grey border rounded-lg p-8  mt-16 shadow" id="box">
+        <div>
+        <p className="pt-4 tracking-normal text-xl font-semibold">
+            Contact us to report a problem, <br></br> 
+            clarify any doubts about us,or <br></br>
+            just find out more.
+            </p>
+            <div className=" border-grey border rounded-lg p-8  mt-8 shadow" id="box">
             <form id="contactForm" className="space-y-4 flex flex-col " onSubmit={submitContactUsForm}>
                 <div>
                     <input type="text" id="name" name="name" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 border-gray-950" placeholder="Your Name" required ></input>
@@ -96,6 +118,8 @@ function clearErrors() {
                 <button type='submit' className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg hover:shadow-red-500/50">Send message</button>
             </form>
         </div>
+        </div>
+
     </div>
   );
 };

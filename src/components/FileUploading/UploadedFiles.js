@@ -11,6 +11,7 @@ function UploadedFiles({files,setFiles,featureName}){
         const imageId=image.id.replace('-div','');
         if(featureName=='pdf-conversion') setFiles(prevFiles=>({...prevFiles,inputFiles:prevFiles.inputFiles.filter((_,index)=>index!==parseInt(imageId))}))
         else setFiles({inputFiles:[],result:[]})
+        console.log(files)
     }
     const handleDrop=(e,newIndex)=>{
         e.preventDefault();
@@ -19,8 +20,6 @@ function UploadedFiles({files,setFiles,featureName}){
         const [movedFile]=newList.splice(oldIndex,1);
         newList.splice(newIndex,0,movedFile)
         setFiles(prevFile=>({...prevFile,inputFiles:newList}))
-        console.log(oldIndex,newIndex)
-
     }
     const handleDragStart=(e,index)=>{
         e.dataTransfer.setData('index',index)
@@ -35,8 +34,9 @@ function UploadedFiles({files,setFiles,featureName}){
                 onDragOver={(e)=>{e.preventDefault()}}
                 onDrop={(e)=>{handleDrop(e,index)}}> 
                 {featureName==='pdf-conversion'&& <div className='indexing-div'>{index+1}</div>}  
-                <img src={URL.createObjectURL(file)} alt={`File ${index}`} />
-                <div className='cross-buttons' id={index+ '-cross-button'} onClick={deleteImage}></div>
+                    <img src={URL.createObjectURL(file)} alt={`File ${index}`} />
+                    <p>{file.name}</p>
+                    <div className='cross-buttons' id={index+ '-cross-button'} onClick={deleteImage}></div>
                 </div>
                 ))}
                 {featureName=='pdf-conversion'&&<AddFiles featureName={featureName} files={files} setFiles={setFiles}></AddFiles>}
