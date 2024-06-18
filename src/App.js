@@ -1,27 +1,33 @@
 import './App.css';
 import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
 import {Route,Routes, useLocation,Navigate} from 'react-router-dom'
-import {Login,Register} from './webpage/Login-Register'
+import {Login,Register,Logout} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
 import {Home} from './webpage'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
 import { ContactUs,AboutUs } from './webpage';
-import { Profile ,History} from './components/User';
-import { useSelector } from 'react-redux';
+import { Profile ,History,Notification,Setting,Support} from './components/User';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
-import { height } from '@fortawesome/free-solid-svg-icons/fa0';
-import { showAlert } from './components/AlertLoader';
+import { setIsLogin, setToken } from './state/UserInformation/ProfileSlice'
 function App() {
-  const [token,setToken]=useState()
   const location=useLocation()
   const showResult=location.pathname.startsWith('/display')
   const blankPageActivate=location.pathname.startsWith('/blank')
   const isMobile=useMediaQuery({query:'(max-width: 767px)'})
   const userInfo=useSelector((state)=>state.userProfile)
+  const dispatch=useDispatch();
+  useEffect(()=>{
+    localStorage.setItem('token','sajan')
+    if(localStorage.getItem('token')){
+      dispatch(setToken(localStorage.getItem('token')))
+      dispatch(setIsLogin(true))
+    }
+  },[])
   return (
     <div className="App">
       <div id="alert-container"></div>
@@ -49,6 +55,10 @@ function App() {
                 <Route path='/user/profile' element={<Profile/>}/>
                 <Route path='/user/history' element={<History/>}/>
                 <Route path="*" element={<NoPageFound/>} />
+                <Route path='/user/notification' element={<Notification/>}/>
+                <Route path='/user/Setting' element={<Setting/>}/>
+                <Route path='/user/Support' element={<Support/>}/>
+                <Route path='/user/logout' element={<Logout/>}/>
           </Routes>
           </div>
           {(!showResult&&!blankPageActivate)&&<Footer/>}

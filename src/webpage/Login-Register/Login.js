@@ -26,7 +26,9 @@ export function Login(){
         await axios.post(base_url+'api/login/',userLoginInfo)
         .then((response)=>{
             dispatch(setUserInfo(response.data))
+            console.log(response.data)
             dispatch(setIsLogin(true))
+            localStorage.setItem('token',response.data.token)
         })
         }
         catch(error){
