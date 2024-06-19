@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlay, faApple, faTiktok, faFacebook, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 function Footer(){
     const loc=useLocation()
     const path=['/login','/register']
@@ -11,36 +11,35 @@ function Footer(){
     }
     return(
         <>
-        <footer class="bg-body-tertiary py-10  min-top-[100%] mt-5 w-full">
+        <footer class="bg-body-tertiary py-10  min-top-[100%] w-full">
         <div class="container mx-auto flex  flex-wrap gap-16   items-center-center justify-evenly w-full tex">
 
             <div class="flex justify-centers gap-16 md:gap-40 lg:gap-52" >
 
                 <div class="flex flex-col gap-2">
                     <h1 class="text-blue-500  font-bold text-2xl">RAN</h1>
-                    <a href="#" class="text-md text-black no-underline">Home</a>
-                    <a href="#" class="text-md  text-black no-underline">Feature</a>
-                    <a href="#" class="text-md text-black no-underline">Tools</a>
-                    <a href="#" class="text-md text-black no-underline">FAQ</a>
+                    <Link to='/' class="text-md text-black no-underline">Home</Link>
+                    <Link to='/feature' class="text-md  text-black no-underline">Feature</Link>
+                    <Link to='/' class="text-md text-black no-underline">FAQ</Link>
                     </div>
                     <div class="flex flex-col gap-2">
                     <h1 class="text-blue-500  font-bold text-2xl">PRODUCT</h1>
-                    <a href="#" class="text-md text-black no-underline">Desktop App</a>
-                    <a href="#" class="text-md  text-black no-underline">Mobile App</a>
-                    <a href="#" class="text-md text-black no-underline">Developers</a>
+                    <Link to='/' class="text-md text-black no-underline">Desktop App</Link>
+                    <Link to='/' class="text-md  text-black no-underline">Mobile App</Link>
+                    <Link to='/' class="text-md text-black no-underline">Developers</Link>
                     </div>
                 </div>
             <div class="flex justify-centers gap-16 md:gap-40 lg:gap-52">
                 <div class="flex flex-col gap-2">
                         <h1 class="text-blue-500  font-bold text-2xl">SOLUTIONS</h1>
-                        <a href="#" class="text-md text-black no-underline">Business</a>
-                        <a href="#" class="text-md  text-black no-underline">Education</a>
+                        <Link to='/' class="text-md text-black no-underline">Business</Link>
+                        <Link to='/' class="text-md  text-black no-underline">Education</Link>
                         </div>
                 <div class="flex flex-col gap-2">
                         <h1 class="text-blue-500  font-bold text-2xl">COMPANY</h1>
-                        <a href="#" class="text-md text-black no-underline">Our Story</a>
-                        <a href="#" class="text-md  text-black no-underline">Blogs</a>
-                        <a href="#" class="text-md text-black no-underline">Contact</a>
+                        <Link to='/' class="text-md text-black no-underline">Our Story</Link>
+                        <Link to='/' class="text-md  text-black no-underline">Blogs</Link>
+                        <Link to='/contact-us' class="text-md text-black no-underline">Contact</Link>
                     </div>
                 </div>
             </div>
