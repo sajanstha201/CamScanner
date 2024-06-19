@@ -21,7 +21,6 @@ function App() {
   const userInfo=useSelector((state)=>state.userProfile)
   const dispatch=useDispatch();
   useEffect(()=>{
-    localStorage.setItem('token','sajan')
     if(localStorage.getItem('token')){
       dispatch(setToken(localStorage.getItem('token')))
       dispatch(setIsLogin(true))
