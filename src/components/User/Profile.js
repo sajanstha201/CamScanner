@@ -26,7 +26,7 @@ export const Profile=()=>{
                                               <div className="w-full flex gap-6">
                                                         <div className="">
                                                             <label className="font-semibold text-lg text-zinc-900 flex justify-start" >First Name</label>
-                                                            <input  placeholder={userInfo.first_name} className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-full   rounded-md" type="text"/>
+                                                            <input  placeholder={userInfo.first_name} className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black focus:border-blue-800  w-full   rounded-md" type="text"/>
                                                         </div>
                                                         <div className="div">
                                                             <label className="font-semibold text-lg text-zinc-900 flex justify-start" >last Name</label>
