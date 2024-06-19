@@ -81,7 +81,7 @@ export const AboutUs = () => {
                            Join thousands of satisfied users who trust [Your Company Name] for their document conversion needs. Experience the ease and reliability of our PDF converter today.</p>
         </div>   
 
-       <div className='w-full flex flex-wrap flex-col gap-11 justify-center'>
+       <div className='w-full flex flex-wrap flex-col gap-11 '>
        <div className='w-full flex items-center justify-center'>
                <img src={aboutimg}  className='h-96 w-96 flex justify-center ' />
                </div>
