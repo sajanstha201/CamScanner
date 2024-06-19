@@ -3,7 +3,7 @@ import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
 import {Route,Routes, useLocation,Navigate} from 'react-router-dom'
 import {Login,Register,Logout} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
-import {FAQ, Home,AboutUs,ContactUs} from './webpage'
+import {FAQ, Home,AboutUs,ContactUs, Feature} from './webpage'
 import { useEffect, useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
@@ -52,6 +52,7 @@ function App() {
                 <Route path='/about-us' element={<AboutUs/>}/>
                 <Route path='/contact-us' element={<ContactUs/>}/>
                 <Route path='/faq' element={<FAQ/>}/>
+                <Route path='/feature' element={<Feature/>}/>
 
                 <Route path='/user/profile' element={<Profile/>}/>
                 <Route path='/user/history' element={<History/>}/>
