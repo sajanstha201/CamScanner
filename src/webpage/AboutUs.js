@@ -7,9 +7,8 @@ import { FaUserCheck } from "react-icons/fa";
 export const AboutUs = () => {
   return (
     <>
-      <div className='flex flex-col  lg:flex-row  justify-between  px-11 gap-16'>
+      <div className='flex flex-col  lg:flex-row  justify-between  px-11 gap-16 m-12'>
        <div className='flex flex-col flex-wrap gap-2   lg:w-[2500px]'>
-           <h1 className=''>About Us</h1>
             <p className=''>Welcome to RAN, your trusted partner for converting documents to PDF seamlessly. At RAN, we understand the importance of reliable and efficient document management solutions. Our mission is to empower individuals and businesses with tools that simplify the process of creating, editing, and sharing PDF files</p>
              <h1>
                  Why to choose us
@@ -82,7 +81,7 @@ export const AboutUs = () => {
                            Join thousands of satisfied users who trust [Your Company Name] for their document conversion needs. Experience the ease and reliability of our PDF converter today.</p>
         </div>   
 
-       <div className='w-full flex flex-wrap flex-col gap-11 justify-center'>
+       <div className='w-full flex flex-wrap flex-col gap-11 '>
        <div className='w-full flex items-center justify-center'>
                <img src={aboutimg}  className='h-96 w-96 flex justify-center ' />
                </div>

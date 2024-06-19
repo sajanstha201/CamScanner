@@ -38,7 +38,6 @@ export const Navbar=()=>{
                     )}
                 <NavItemWithIcon to={'/about-us'} icon={<FontAwesomeIcon icon={ faInfoCircle} />} currentPath={loc}>About Us</NavItemWithIcon>
                 <NavItemWithIcon to={'/contact-us'} icon={<FontAwesomeIcon icon={faEnvelope} />} currentPath={loc}>Contact Us</NavItemWithIcon>
-                <NavItemWithIcon to={'/faq'} icon={<FontAwesomeIcon icon={faQuestionCircle} />} currentPath={loc}>FAQ</NavItemWithIcon>
                 </Nav>
                 {!userInfo.isLogin && (
                     <Nav>
