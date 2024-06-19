@@ -4,11 +4,7 @@ import  aboutimg2 from '../../src/static/images/copywriting-social-media-post-co
 import { GiProgression } from "react-icons/gi";
 import { MdOutlineSecurity } from "react-icons/md";
 import { FaUserCheck } from "react-icons/fa";
-
-
 export const AboutUs = () => {
-
-
   return (
     <>
       <div className='flex flex-col  lg:flex-row  justify-between  px-11 gap-16'>

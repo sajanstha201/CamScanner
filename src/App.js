@@ -3,13 +3,12 @@ import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
 import {Route,Routes, useLocation,Navigate} from 'react-router-dom'
 import {Login,Register,Logout} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
-import {FAQ, Home} from './webpage'
+import {FAQ, Home,AboutUs,ContactUs} from './webpage'
 import { useEffect, useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { ContactUs } from './webpage';
 import { Profile ,History,Notification,Setting,Support} from './components/User';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
@@ -50,6 +49,7 @@ function App() {
                 <Route path='/display-pdf' element={<DisplayPdf/>}/>
                 <Route path='/display-excel' element={<DisplayExcel/>}/>
                 <Route path='/blank' element={<BlankPage/>}/>
+                <Route path='/about-us' element={<AboutUs/>}/>
                 <Route path='/contact-us' element={<ContactUs/>}/>
                 <Route path='/faq' element={<FAQ/>}/>
 
