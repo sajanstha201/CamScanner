@@ -2,20 +2,7 @@ export const Profile=()=>{
     return(
         <>
            <div className="w-full  bg-gray-300 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 ">
-              <div className="flex flex-col gap-3 ">
-                  <div className=" bg-white w-64 rounded-lg h-12 flex items-center px-6 shadow-md shadow-zinc-800">
-                       <h1  className="text-lg font-bold">Account Information</h1>
-                  </div>
-                  <div className=" bg-white w-64 rounded-lg h-12 flex items-center px-6 shadow-md shadow-zinc-800">
-                       <h1  className="text-lg font-bold">Notification</h1>
-                  </div>
-                  <div className=" bg-white w-64 rounded-lg h-12 flex items-center px-6 shadow-md shadow-zinc-800">
-                       <h1  className="text-lg font-bold">Membership plan</h1>
-                  </div>
-                  <div className=" bg-white w-64 rounded-lg h-12 flex items-center px-6 shadow-md shadow-zinc-800">
-                       <h1  className="text-lg font-bold">Password and security</h1>
-                  </div>
-              </div> 
+             
 
              <div className=" w-full lg:w-3/5 h-7/5 flex flex-col gap-4  ">
                   <div className="w-full bg-white flex flex-wrap justify-between gap-5 py-3 px-10 items-center rounded-xl">
