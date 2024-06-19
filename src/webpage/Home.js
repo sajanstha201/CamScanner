@@ -6,8 +6,8 @@ export const Home=()=>{
     return(
         <>
     <div class="h-52 w-full flex flex-col justify-center items-center text-center p-4">
-        <h1 class="text-3xl md:text-7xl font-bold">One stop <span class="text-[blue]">PDF</span> management</h1>   
-        <h1 class="text-3xl md:text-7xl font-bold">tools for <span class="text-[blue]">You</span></h1>
+        <h1 class="text-3xl md:text-7xl font-bold">One stop <span class="text-[#007bff]">PDF</span> management</h1>   
+        <h1 class="text-3xl md:text-7xl font-bold">tools for <span class="text-[#007bff]">You</span></h1>
     </div>
     <div class="w-full h-auto md:h-[55vh]  flex flex-col  md:flex-row items-center gap-10 md:gap-20 justify-center p-4 md:p-0">
         <Link to='/pdf-conversion'  class="no-underline bg-white h-100  w-[50%] md:w-[25%] rounded-lg border-grey-700 border shadow-sm shadow-zinc-700 p-4 flex flex-col justify-center items-center hover:shadow-cyan-500/50">
