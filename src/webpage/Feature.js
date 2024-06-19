@@ -21,9 +21,9 @@ export const Feature=()=>{
 
 
       <div className='w-full flex mt-12   justify-center'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg'>
+          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
            <div className='flex w-full  flex-col  flex-wrap'>
-            <div className='w-full flex justify-center items-center'>
+            <div className='w-full flex justify-center items-center '>
 
           <img class="h-20 w-20" src={pdfConversionImage} sizes='30' alt="PDF Conversion"></img>
             </div>
@@ -41,9 +41,9 @@ export const Feature=()=>{
 
 
       <div className='w-full flex   justify-center'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg'>
+          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
           <div className='flex w-full  flex-col  flex-wrap'>
-            <div className='w-full flex justify-center items-center'>
+            <div className='w-full flex justify-center items-center '>
 
           <img class="h-20 w-20" src={tableExtractionImage} sizes='30' alt="PDF Conversion"></img>
             </div>
@@ -61,9 +61,9 @@ export const Feature=()=>{
         </div>
 
       <div className='w-full flex   justify-center mb-11'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg'>
+          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
           <div className='flex w-full  flex-col  flex-wrap'>
-            <div className='w-full flex justify-center items-center'>
+            <div className='w-full flex justify-center items-center '>
 
           <img class="h-20 w-20" src={documentAnalysisImage} sizes='30' alt="PDF Conversion"></img>
             </div>
