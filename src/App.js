@@ -3,13 +3,13 @@ import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
 import {Route,Routes, useLocation,Navigate} from 'react-router-dom'
 import {Login,Register,Logout} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
-import {Home} from './webpage'
+import {FAQ, Home} from './webpage'
 import { useEffect, useState } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { ContactUs,AboutUs } from './webpage';
+import { ContactUs } from './webpage';
 import { Profile ,History,Notification,Setting,Support} from './components/User';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
@@ -51,7 +51,8 @@ function App() {
                 <Route path='/display-excel' element={<DisplayExcel/>}/>
                 <Route path='/blank' element={<BlankPage/>}/>
                 <Route path='/contact-us' element={<ContactUs/>}/>
-                <Route path='/about-us' element={<AboutUs/>}/>
+                <Route path='/faq' element={<FAQ/>}/>
+
                 <Route path='/user/profile' element={<Profile/>}/>
                 <Route path='/user/history' element={<History/>}/>
                 <Route path="*" element={<NoPageFound/>} />
