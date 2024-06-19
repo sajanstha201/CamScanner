@@ -33,7 +33,7 @@ export const Profile=()=>{
                                                             <input  placeholder={userInfo.last_name} className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-full   rounded-md" type="text"/>
                                                         </div>
                                               </div>
-                                              <div className="flex w-full gap-5">
+                                              <div className=" w-full flex gap-6">
                                                        <div>
 
                                                          <label className="font-semibold text-lg text-zinc-900 flex justify-start " for="username">Username</label>
@@ -46,13 +46,21 @@ export const Profile=()=>{
                                                         <input  placeholder="9872312414" className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-full   rounded-md" type="number"/>   
                                                   </div>     
                                              </div>
-                                             
-                                                   <div className="flex flex-col justify-start">
+                                             <div className=" w-full flex gap-6">
+                                                       <div>
 
-                                             
-                                             <label className="font-semibold text-lg text-zinc-900  flex justify-start">Email</label>
-                                             <input placeholder={userInfo.email} className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-96   rounded-md" type="email" />
-                                                   </div>
+                                                       <label className="font-semibold text-lg text-zinc-900  flex justify-start">Email</label>
+                                                       <input placeholder={userInfo.email} className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-full   rounded-md" type="email" />
+                                                       </div>
+
+                                                   <div >
+
+                                                        <label className="font-semibold text-lg text-zinc-900 flex justify-start" for="">Alternative Email</label>
+                                                        <input  placeholder="example@gmail.com" className=" h-10 px-4 text-base text-zinc-700 font-mono border border-black active:border-blue-500   w-full   rounded-md" type="Email"/>   
+                                                  </div>     
+                                             </div>
+
+                                  
                                              
                                              <div className="flex items-end mt-6 ">
                                          <button className="bg-blue-700 px-8 py-2 rounded-md text-white font-bold mr-6">Update Information </button>
