@@ -110,11 +110,11 @@ function clearErrors() {
                     <textarea id="message" name="message" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 border-gray-950" rows="10" placeholder="Write a message" required></textarea>
                     <p id="messageError" className="error hidden">Please write a message.</p>
                 </div>
-                <div className="flex items-center">
+               {/* <div className="flex items-center">
                     <input type="checkbox" id="terms" name="terms" className="mr-2" required></input>
                     <label htmlFor="terms" className="text-sm">I accept <a href="#" className="text-blue-500 underline">Terms and Conditions</a> and <a href="#" className="text-blue-500 underline">Legal & Privacy</a></label>
                     <p id="termsError" className="error hidden">You must accept the terms.</p>
-                </div>
+                </div>*/}
                 <button type='submit' className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg hover:shadow-red-500/50">Send message</button>
             </form>
         </div>

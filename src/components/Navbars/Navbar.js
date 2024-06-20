@@ -47,9 +47,6 @@ export const Navbar=()=>{
                 )}
                 {userInfo.isLogin && (
                     <>
-                    <Nav.Link as={Link} to="/user/notification" className='m-2'>
-                        <FontAwesomeIcon icon={faBell} size='1x'/> 
-                    </Nav.Link>
                     <UserNavbar></UserNavbar>
                     </>
                     )}

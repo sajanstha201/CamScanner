@@ -9,11 +9,13 @@ import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { Profile ,Notification,Setting, HistoryPage} from './components/User';
+import { Profile ,Notification,Setting} from './components/User';
+import { HistoryMainPage } from './components/User/History';
 import { Support } from './components/User/Support';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
 import { setIsLogin, setToken } from './state/UserInformation/ProfileSlice'
+import { Testing } from './Testing';
 function App() {
   const location=useLocation()
   const showResult=location.pathname.startsWith('/display')
@@ -23,10 +25,11 @@ function App() {
   const dispatch=useDispatch();
   useEffect(()=>{
     if(localStorage.getItem('token')){
+      console.log('setting up the token')
       dispatch(setToken(localStorage.getItem('token')))
       dispatch(setIsLogin(true))
     }
-  },[])
+  },[location])
   return (
     <div className="App">
       <div id="alert-container"></div>
@@ -55,12 +58,12 @@ function App() {
                 <Route path='/feature' element={<Feature/>}/>
 
                 <Route path='/user/profile' element={<Profile/>}/>
-                <Route path='/user/history' element={<HistoryPage/>}/>
+                <Route path='/user/history' element={<HistoryMainPage/>}/>
                 <Route path="*" element={<NoPageFound/>} />
-                <Route path='/user/notification' element={<Notification/>}/>
                 <Route path='/user/Setting' element={<Setting/>}/>
                 <Route path='/user/Support' element={<Support/>}/>
                 <Route path='/user/logout' element={<Logout/>}/>
+                <Route path='/testing' element={<Testing/>}/>
           </Routes>
           </div>
           {(!showResult&&!blankPageActivate)&&<Footer/>}
