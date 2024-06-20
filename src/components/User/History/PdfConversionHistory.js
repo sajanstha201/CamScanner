@@ -32,8 +32,9 @@ export const PdfConversionHistory=()=>{
         getData();
         setTimeout(()=>{console.log(historyData)},10000)
     },[dropDown])
+    const h=['sajan','shrestha','alfdjl']
     return(
-        <div className="bg-gray-100 w-full rounded-md flex flex-col items-start m-1 mb-3 shadow-sm">
+        <div className="bg-gray-200 w-full rounded-md flex flex-col items-start m-1 mb-3 shadow-sm">
             <div className={`bg-gray-400 w-full lg:h-[50px]  items-center justify-between flex shadow-md ${dropDown?'rounded-t-md':'rounded-md '}`} onClick={()=>{setDropDown(!dropDown)}}>
                 <div className="pl-2">
                     Pdf Conversion
@@ -42,7 +43,9 @@ export const PdfConversionHistory=()=>{
                     <FontAwesomeIcon icon={dropDown?faChevronUp:faChevronDown}/>
                </div>
             </div>
-
+            <div style={{display:dropDown?'flex':'none'}} className="flex-wrap ">
+                {h.map((value,index)=>(<InstanceHistory instanceHistoryData={value}/>))}
+               </div>
         </div>
     )
 }
