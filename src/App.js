@@ -9,7 +9,8 @@ import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { Profile ,Notification,Setting,Support, HistoryPage} from './components/User';
+import { Profile ,Notification,Setting, HistoryPage} from './components/User';
+import { Support } from './components/User/Support';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
 import { setIsLogin, setToken } from './state/UserInformation/ProfileSlice'
