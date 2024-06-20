@@ -21,7 +21,7 @@ export const Feature=()=>{
 
 
       <div className='w-full flex mt-12   justify-center'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
+          <div className=' flex gap-1 mt-10 w-4/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
            <div className='flex w-full  flex-col  flex-wrap'>
             <div className='w-full flex justify-center items-center '>
 
@@ -41,7 +41,7 @@ export const Feature=()=>{
 
 
       <div className='w-full flex   justify-center'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
+          <div className=' flex gap-1 mt-10 w-4/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
           <div className='flex w-full  flex-col  flex-wrap'>
             <div className='w-full flex justify-center items-center '>
 
@@ -61,7 +61,7 @@ export const Feature=()=>{
         </div>
 
       <div className='w-full flex   justify-center mb-11'>
-          <div className=' flex gap-1 mt-10 w-5/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
+          <div className=' flex gap-1 mt-10 w-4/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
           <div className='flex w-full  flex-col  flex-wrap'>
             <div className='w-full flex justify-center items-center '>
 
