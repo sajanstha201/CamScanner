@@ -9,7 +9,7 @@ import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { Profile ,History,Notification,Setting,Support} from './components/User';
+import { Profile ,Notification,Setting,Support, HistoryPage} from './components/User';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
 import { setIsLogin, setToken } from './state/UserInformation/ProfileSlice'
@@ -54,7 +54,7 @@ function App() {
                 <Route path='/feature' element={<Feature/>}/>
 
                 <Route path='/user/profile' element={<Profile/>}/>
-                <Route path='/user/history' element={<History/>}/>
+                <Route path='/user/history' element={<HistoryPage/>}/>
                 <Route path="*" element={<NoPageFound/>} />
                 <Route path='/user/notification' element={<Notification/>}/>
                 <Route path='/user/Setting' element={<Setting/>}/>

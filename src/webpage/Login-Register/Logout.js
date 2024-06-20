@@ -16,6 +16,7 @@ export const Logout=()=>{
     useEffect(()=>{
         dispatch(setUserInfo(userInfo));
         dispatch(setIsLogin(false));
+        localStorage.removeItem('token')
         showAlert('Logout successfully','red')
     },[])
     return(
