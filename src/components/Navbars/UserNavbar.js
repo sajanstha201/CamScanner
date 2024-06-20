@@ -47,9 +47,6 @@ export const UserNavbar=()=>{
                     <Nav.Link as={Link} to="/user/history">
                         <FontAwesomeIcon icon={faHistory} /> My History
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/user/notification">
-                        <FontAwesomeIcon icon={faBell} /> Notification
-                    </Nav.Link>
                     <Nav.Link as={Link} to="/user/setting">
                         <FontAwesomeIcon icon={faCog} /> Settings
                     </Nav.Link>

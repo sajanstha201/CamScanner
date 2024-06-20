@@ -4,7 +4,7 @@ import { useDocumentAnalysisFile } from "../../context/AppProvider";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { activate_loader } from "../AlertLoader";
+import { activate_loader, showAlert } from "../AlertLoader";
 import mammoth from "mammoth";
 import { file } from "jszip";
 function DocumentAnalysis(){
@@ -18,14 +18,12 @@ function DocumentAnalysis(){
             console.log("sending request to api")
             const imageData=new FormData();
             files.inputFiles.forEach((file)=>imageData.append('image',file))
-            const response = await axios.post(baseUrl + 'api/convert-doc/', imageData, {
+            const urlResponse = await axios.post(baseUrl + 'api/convert-doc/', imageData, {
                 headers: {
                     'Authorization': userInfo.token,
                 },
-                responseType:'arraybuffer'
             });
-            console.log(response.data)
-            setFiles(prevData=>({...prevData,result:[response.data]}))
+            console.log(urlResponse.data)
         }
         catch(error){
             console.log(error)
@@ -34,17 +32,30 @@ function DocumentAnalysis(){
             activate_loader(false)
         }
     }
-    const downloadDoc=()=>{
-        console.log(files)
-        const blob = new Blob([files.result[0]], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        const url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download ='download.docx';
-        a.click();
-        window.URL.revokeObjectURL(url);
+    const downloadDoc=async()=>{
+        try{
+            activate_loader(true)
+            const response=await axios.get(baseUrl+files.result[0].document.substring(1),{
+                responseType:'arraybuffer',
+            })
+            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download =files.result[0].document.split('/').pop();
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        catch(error){
+            showAlert(error)
+            console.log(error)
+        }
+        finally{
+            activate_loader(false)
+        }
+
     }
     return(
         <>

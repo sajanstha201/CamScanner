@@ -1,6 +1,3 @@
 export {Profile} from './Profile'
-export {HistoryPage} from './History/HistoryPage'
-export {OneDayHistory} from './History/OneDayHistory'
-export {InstanceHistory} from './History/InstanceHistory'
 export {Notification} from './Notification'
 export {Setting} from './Setting'
