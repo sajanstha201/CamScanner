@@ -88,26 +88,21 @@ function clearErrors() {
             <div className=" border-grey border rounded-lg p-8  mt-8 shadow" id="box">
             <form id="contactForm" className="space-y-4 flex flex-col " onSubmit={submitContactUsForm}>
                 <div>
-                    <input type="text" id="name" name="name" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 border-gray-950" placeholder="Your Name" required ></input>
+                    <input type="text" id="name" name="name" className="mt-1 block w-full border  rounded-md shadow-sm p-2 border-gray-950" placeholder="Your Name" required ></input>
                     <p id="nameError" className="error hidden">Please enter your name.</p>
                 </div>
                 <div className="flex justify-center items-center gap-2">
                         <div>
-                            <input type="email" id="email" name="email" className="mt-1 block w-48 border border-gray-300 rounded-md shadow-sm p-2 border-gray-950" placeholder="Your Email" required ></input>
+                            <input type="email" id="email" name="email" className="mt-1 block w-48 border  rounded-md shadow-sm p-2 border-gray-950" placeholder="Your Email" required></input>
                             <p id="emailError" className="error hidden">Please enter a valid email address.</p>
                         </div>
                         <div>
-                            <select id="subject" name="subject" className="mt-1 block w-48 border border-gray-300 rounded-md shadow-sm p-2 border-gray-950 " required>
-                                    <option value="">Choose a subject</option>
-                                    <option value="report">Report a problem</option>
-                                    <option value="clarify">Clarify a doubt</option>
-                                    <option value="findout">Find out more</option>
-                            </select>
+                             <input type='text' placeholder='write a subject' className='mt-1 block w-48 border  rounded-md shadow-sm p-2 border-gray-950'required/>
                             <p id="subjectError" className="error hidden">Please choose a subject.</p>
                         </div>
                 </div>
                 <div>
-                    <textarea id="message" name="message" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 border-gray-950" rows="10" placeholder="Write a message" required></textarea>
+                    <textarea id="message" name="message" className="mt-1 block w-full border  rounded-md shadow-sm p-2 border-gray-950" rows="10" placeholder="Write a message" required ></textarea>
                     <p id="messageError" className="error hidden">Please write a message.</p>
                 </div>
                {/* <div className="flex items-center">
