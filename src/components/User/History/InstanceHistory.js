@@ -3,7 +3,7 @@ import { faDownload, faL } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 export const InstanceHistory=({instanceHistoryData,icon})=>{
     return(
-        <div className={`border bg-[white] hover:bg-gray-100 border-b mt-1 h-10 w-full flex  items-center jusitfy-center  relative cursor-pointer`}>
+        <div className={`border bg-[white] hover:bg-gray-100 h-12 w-full flex  items-center jusitfy-center  relative cursor-pointer`}>
             <div className="absolute left-2">
                {icon}
             </div>
