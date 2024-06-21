@@ -1,19 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDownload, faL } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
-export const InstanceHistory=({instanceHistoryData})=>{
-    const [isHover,setIsHover]=useState(false)
+export const InstanceHistory=({instanceHistoryData,icon})=>{
     return(
-        <div className={`border ${isHover?'bg-gray-400':'bg-white'} shadow-md rounded-md w-[120px] h-[120px] m-3 flex items-center justify-center`}
-        onMouseEnter={()=>{setIsHover(true)}}
-        onMouseLeave={()=>{setIsHover(false)}}>
-            <div className={`${isHover?'hidden':'flex'}`}>
+        <div className={`border bg-[white] hover:bg-gray-100 border-b mt-1 h-10 w-full flex  items-center jusitfy-center  relative cursor-pointer`}>
+            <div className="absolute left-2">
+               {icon}
+            </div>
+            <div className="absolute left-10">
                 {instanceHistoryData}
             </div>
-            <div className={`${isHover?'flex':'hidden'}`}>
-                <FontAwesomeIcon icon={faDownload}/>
+            <div className="absolute left-[50%]">
+                Date:
+            </div>  
+            <div className="absolute right-12">
+                Pages
             </div>
-
+            <div className="absolute right-3 ">
+                    <FontAwesomeIcon icon={faDownload}/>
+            </div>
         </div>
     )
 }

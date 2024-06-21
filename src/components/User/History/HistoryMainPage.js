@@ -1,5 +1,4 @@
 import axios from "axios"
-import { OneDayHistory } from "./OneDayHistory"
 import { PdfConversionHistory } from "./PdfConversionHistory"
 import { TableExtractionHistory } from "./TableExtractionHistory"
 import { DocumentAnalysisHistory } from "./DocumentAnalysisHistory"

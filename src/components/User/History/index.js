@@ -1,6 +1,5 @@
 export {HistoryMainPage} from './HistoryMainPage'
 export {InstanceHistory} from './InstanceHistory'
-export {OneDayHistory} from './OneDayHistory'
 export {PdfConversionHistory} from './PdfConversionHistory'
 export {TableExtractionHistory} from './TableExtractionHistory'
 export {DocumentAnalysisHistory} from './DocumentAnalysisHistory'

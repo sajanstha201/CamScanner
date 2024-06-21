@@ -1,4 +1,4 @@
-import { OneDayHistory } from "./OneDayHistory"
+
 export const TableExtractionHistory=()=>{
     const historyDict={
         1:{time:1,data:['sajan','shrerstha','country','nepal','city','kathmandu']},
@@ -10,9 +10,6 @@ export const TableExtractionHistory=()=>{
         <div className="flex flex-col items-center  p-2 bg-gray-100 ">
             <h1>History</h1>
             <div className="flex flex-col w-[70%] ">
-            {Object.keys(historyDict).map((key)=>(
-                <OneDayHistory key={key} oneDayHistoryData={historyDict[key]}/>
-            ))}
             </div>
         </div>
     )
