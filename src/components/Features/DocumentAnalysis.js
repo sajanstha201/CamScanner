@@ -24,6 +24,7 @@ function DocumentAnalysis(){
                 },
             });
             console.log(urlResponse.data)
+            setFiles(prevFile=>({...prevFile,result:[urlResponse.data]}))
         }
         catch(error){
             console.log(error)
@@ -35,6 +36,7 @@ function DocumentAnalysis(){
     const downloadDoc=async()=>{
         try{
             activate_loader(true)
+            console.log(files)
             const response=await axios.get(baseUrl+files.result[0].document.substring(1),{
                 responseType:'arraybuffer',
             })
@@ -49,7 +51,7 @@ function DocumentAnalysis(){
             window.URL.revokeObjectURL(url);
         }
         catch(error){
-            showAlert(error)
+            showAlert(error,'red')
             console.log(error)
         }
         finally{

@@ -24,6 +24,7 @@ export function TableExtraction(){
                 headers:{ 'Authorization': userInfo.token }
                 })
             const responseData=response.data.imagedata;
+            console.log('table extractoin response',responseData)
             const tableData={};
             responseData.forEach((value,index)=>tableData[index]=value);
             const pdfBlob = new Blob([JSON.stringify(responseData)], { type: 'application/pdf' });

@@ -9,7 +9,8 @@ import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
 import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { Profile ,Notification,Setting} from './components/User';
+import { Profile ,Notification} from './components/User';
+import { SettingMainPage } from './components/User/Setting';
 import { HistoryMainPage } from './components/User/History';
 import { Support } from './components/User/Support';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +26,6 @@ function App() {
   const dispatch=useDispatch();
   useEffect(()=>{
     if(localStorage.getItem('token')){
-      console.log('setting up the token')
       dispatch(setToken(localStorage.getItem('token')))
       dispatch(setIsLogin(true))
     }
@@ -60,7 +60,7 @@ function App() {
                 <Route path='/user/profile' element={<Profile/>}/>
                 <Route path='/user/history' element={<HistoryMainPage/>}/>
                 <Route path="*" element={<NoPageFound/>} />
-                <Route path='/user/Setting' element={<Setting/>}/>
+                <Route path='/user/Setting' element={<SettingMainPage/>}/>
                 <Route path='/user/Support' element={<Support/>}/>
                 <Route path='/user/logout' element={<Logout/>}/>
                 <Route path='/testing' element={<Testing/>}/>

@@ -1,0 +1,1 @@
+export {SettingMainPage} from './SettingMainPage'

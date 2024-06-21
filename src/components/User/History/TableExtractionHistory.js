@@ -1,16 +1,57 @@
 
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+import {useSelector } from "react-redux";
+import {showAlert} from '../../AlertLoader/index'
+import { OneHistory } from "./OneHistory";
+import * as XLSX from 'xlsx'
 export const TableExtractionHistory=()=>{
-    const historyDict={
-        1:{time:1,data:['sajan','shrerstha','country','nepal','city','kathmandu']},
-        2:{time:2,data:['sajan','shrerstha','country','nepal','city','kathmandu']},
-        3:{time:3,data:['sajan','shrerstha','country','nepal','city','kathmandu']},
-        4:{time:4,data:['sajan','shrerstha','country','nepal','city','kathmandu']},
+    const baseUrl=useSelector((state)=>state.baseUrl).backend
+    const userInfo=useSelector((state)=>state.userProfile)
+    const [historyData,setHistoryData]=useState([])
+    const [nextUrl,setNextUrl]=useState(baseUrl + 'api/images/')
+    const getMoreData=async()=>{
+        try{
+            if(nextUrl===null){
+                showAlert('No More History','red')
+            }
+            else{
+                const response = await axios.get(nextUrl,{
+                    headers: { 'Authorization': 'Token '+localStorage.getItem('token') }
+                });
+                setNextUrl(response.data.next)
+                setHistoryData(prevData=>[...prevData,...response.data.results])
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
     }
+    const downloadFile=async(instanceFile)=>{
+        const excelData=[]
+        instanceFile.table.forEach((value,index)=>{excelData.push(JSON.parse(value))})
+        const tableData={};
+        excelData.forEach((value,index)=>tableData[index]=value);
+        const worksheets=[];
+        Object.keys(excelData).map((key)=>{
+            const dataArray=Object.values(excelData[key]).map((row)=>row)
+            const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
+            worksheets.push({name:key,data:worksheet})
+        })
+        
+        const workbook=XLSX.utils.book_new();
+        worksheets.forEach((worksheet,i)=>{
+            XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
+        })
+        XLSX.writeFile(workbook, "table extraction.xlsx");
+    }
+    useEffect(()=>{
+        getMoreData();
+    },[])
     return(
-        <div className="flex flex-col items-center  p-2 bg-gray-100 ">
-            <h1>History</h1>
-            <div className="flex flex-col w-[70%] ">
-            </div>
+        <div className="w-full flex justify-center">
+            <OneHistory featureName={'tableExtraction'} getMoreData={getMoreData} historyData={historyData} downloadFile={downloadFile}/>
         </div>
     )
 }
