@@ -37,7 +37,7 @@ export function TableExtraction(){
         }
         catch(error){
             console.log(error)
-            showAlert(error,'red')
+            showAlert(error.response.data.error,'red')
         }
         finally{
             activate_loader(false)

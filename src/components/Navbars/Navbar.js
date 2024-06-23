@@ -45,7 +45,7 @@ export const Navbar=()=>{
                         <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                     </Nav>
                 )}
-                {!userInfo.isLogin && (
+                {userInfo.isLogin && (
                     <>
                     <UserNavbar></UserNavbar>
                     </>

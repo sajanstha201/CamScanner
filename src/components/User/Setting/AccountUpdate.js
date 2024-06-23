@@ -2,9 +2,14 @@ import { faCircle,faL,faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Button } from "react-bootstrap"
+import { activate_loader, showAlert } from "../../AlertLoader"
+import axios from "axios"
+import { useSelector } from "react-redux"
 export const AccountUpdate=()=>{
     const [isImageUploaded,setIsImageUploaded]=useState(false)
     const [userImage,setUserImage]=useState()
+    const baseUrl=useSelector((state)=>state.baseUrl).backend
+    const userInfo=useSelector((state)=>state.userProfile)
     const checkImageUpload=()=>{
         const imageFiles=document.getElementById('user-pic-update').files;
         if(imageFiles.length!==0){
@@ -14,6 +19,40 @@ export const AccountUpdate=()=>{
         else{
             setIsImageUploaded(false)
         }
+    }
+    const updateImage=async()=>{
+        try{
+            activate_loader(true);
+            const inputImage=document.getElementById('user-pic-update').files[0];
+            const imageFormData=new FormData();
+            imageFormData.append('photo',inputImage);
+            const response=await axios.patch(baseUrl+'api/users/'+userInfo.id+'/',imageFormData,{headers:{'Authorization':userInfo.token}})
+            showAlert('successfully uploaded the photo','green')
+        }
+        catch(error){
+            console.log(error)
+            showAlert(error,'red')
+        }
+        finally{
+            activate_loader(false)
+        }
+    }
+
+    const updateData=async(e)=>{
+        try{
+            activate_loader(true);
+            const response=await axios.patch(baseUrl+'api/users/'+userInfo.id+'/',{
+                [e.target.previousSibling.id]:e.target.previousSibling.value
+            },{headers:{'Authorization':userInfo.token}})
+        }
+        catch(error){
+            console.log(error)
+            showAlert(error,'red')
+        }
+        finally{
+            activate_loader(false)
+        }
+
     }
     return(
         <>
@@ -36,7 +75,7 @@ export const AccountUpdate=()=>{
                         <Button variant="danger" onClick={()=>{setIsImageUploaded(false)}}>Remove</Button>
                     </div>
                   </div>
-                  <Button>Update</Button>
+                  <Button onClick={updateImage}>Update</Button>
                </div> 
                   <div className="w-full h-full bg-white rounded-sm flex  flex-col p-9 justify-center  gap-8">
                      <h1  className="text-xl font-bold flex justify-center">Account Update</h1>
@@ -44,22 +83,26 @@ export const AccountUpdate=()=>{
                         <div className="w-[80%] flex sm:flex-col lg:flex-row md:flex-col gap-3">
                                 <label className="font-semibold text-lg text-zinc-900 flex justify-start w-60" >First Name</label>
                                 <input  className=" h-10 px-4 w-full flex items-start items-center text-zinc-700 font-mono border border-black    w-full   rounded-sm"  id='first_name'></input>
-                                <Button>Update</Button>
+                                <Button onClick={updateData}>Update</Button>
                             </div>
                             <div className="w-[80%] sm:flex-col lg:flex-row md:flex-col flex gap-3">
                                 <label className="font-semibold text-lg text-zinc-900 flex justify-start w-60" >last Name</label>
                                 <input className=" h-10 px-4 w-full text-zinc-700 flex items-start items-center font-mono border border-black  w-full   rounded-sm" id='last_name' ></input>
-                                <Button>Update</Button>
+                                <Button onClick={updateData}>Update</Button>
                             </div>
-                            <div className="w-[80%] sm:flex-col lg:flex-row md:flex-col flex gap-3">
+                            {/**
+                             * 
+                             *  <div className="w-[80%] sm:flex-col lg:flex-row md:flex-col flex gap-3">
                                 <label className="font-semibold text-lg text-zinc-900 flex justify-start w-60" >Email</label>
-                                <input  className=" h-10 w-full px-4 flex items-start items-center text-zinc-700 font-mono border border-black    w-full   rounded-sm"  id='first_name'></input>
-                                <Button>Update</Button>
+                                <input  className=" h-10 w-full px-4 flex items-start items-center text-zinc-700 font-mono border border-black    w-full   rounded-sm"  id='email'></input>
+                                <Button onClick={updateData}>Update</Button>
                             </div>
+                            */}
+   
                             <div className="w-[80%] sm:flex-col  lg:flex-row md:flex-col flex gap-3">
                             <label className="font-semibold text-lg text-zinc-900 flex justify-start w-60" >Phone Number</label>
-                            <input className=" h-10 w-full px-4 text-zinc-700 flex items-start items-center font-mono border border-black  w-full   rounded-sm" id='last_name' ></input>
-                            <Button>Update</Button>
+                            <input className=" h-10 w-full px-4 text-zinc-700 flex items-start items-center font-mono border border-black  w-full   rounded-sm" id='contact' ></input>
+                            <Button onClick={updateData}>Update</Button>
                         </div>
                          </div >
                                

@@ -4,7 +4,7 @@ import { Link ,Navigate} from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {activate_loader,showAlert} from '../../components/AlertLoader/index'
-import { setIsLogin ,setUserInfo} from '../../state/UserInformation/ProfileSlice';
+import { setIsLogin ,setToken,setUserInfo} from '../../state/UserInformation/ProfileSlice';
 export function Login(){
     const user_profile=useSelector((state)=>state.userProfile)
     const dispatch=useDispatch()
@@ -27,6 +27,7 @@ export function Login(){
         .then((response)=>{
             dispatch(setUserInfo(response.data))
             console.log(response.data)
+            dispatch(setToken(response.data.token))
             dispatch(setIsLogin(true))
             localStorage.setItem('token',response.data.token)
         })
@@ -48,6 +49,7 @@ export function Login(){
                 <input id='password' name='password' type='password' onChange={handleChange}required></input>
                 <button type='submit' onClick={submitForm}>Login</button>
                 <Link to='/register' style={{marginTop:'20px'}}>Don't have an account?</Link>
+                <Link to='/anti-nav/otp'>Forgot Password?</Link>
             </div>
         </div>
 
