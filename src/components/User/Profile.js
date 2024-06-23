@@ -16,7 +16,7 @@ export const Profile=()=>{
     }
     return(
         <>
-           <div className="w-full  bg-gray-100 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 ">
+           <div className="w-full  bg-gray-100 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 min-h-[80vh]">
              <div className=" w-full lg:w-3/5 h-7/5 flex flex-col gap-4  ">
                   <div className="w-full bg-white flex flex-wrap justify-between gap-5 py-3 px-10 items-center rounded-sm">
                      <div className="flex items-center gap-7 flex-wrap">

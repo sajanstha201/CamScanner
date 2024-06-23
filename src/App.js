@@ -59,11 +59,12 @@ function App() {
 
                 <Route path='/user/profile' element={<Profile/>}/>
                 <Route path='/user/history' element={<HistoryMainPage/>}/>
-                <Route path="*" element={<NoPageFound/>} />
                 <Route path='/user/Setting' element={<SettingMainPage/>}/>
                 <Route path='/user/Support' element={<Support/>}/>
                 <Route path='/user/logout' element={<Logout/>}/>
+                
                 <Route path='/testing' element={<Testing/>}/>
+                <Route path="*" element={<NoPageFound/>} />
           </Routes>
           </div>
           {(!showResult&&!blankPageActivate)&&<Footer/>}
