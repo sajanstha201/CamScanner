@@ -33,19 +33,26 @@ export const PdfConversionHistory=()=>{
         }
     }
     const downloadFile=async(instanceFile)=>{
-        const response=await axios.get(instanceFile.file,{
-            'Authorization':'Token '+localStorage.getItem('token'),
-            responseType:'arraybuffer'
-        });
-        const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        const url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download =instanceFile.file.split('/').pop();
-        a.click();
-        window.URL.revokeObjectURL(url);
+        try{
+            const response=await axios.get(instanceFile.file,{
+                'Authorization':'Token '+localStorage.getItem('token'),
+                responseType:'arraybuffer'
+            });
+            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download =instanceFile.file.split('/').pop();
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        catch(error){
+            showAlert(error,'red');
+            console.log(error)
+        }
+
     }
     useEffect(()=>{
         getMoreData();

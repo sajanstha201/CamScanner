@@ -3,34 +3,37 @@ import { faDownload, faL } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import axios from "axios"
+import { showAlert } from "../../AlertLoader"
 export const InstanceHistory=({featureName,instanceHistoryData,downloadFile})=>{
     const [imageUrl,setImageUrl]=useState('')
     useEffect(() => {
         const fetchImage = async () => {
           try {
-            var imageUrl=null;
-            switch(featureName){
-              case 'pdfConversion':
-                  imageUrl=instanceHistoryData.pages[0].image;
-                  break;
-              case 'tableExtraction':
-                  imageUrl=instanceHistoryData.image;
-                  break;
-              case 'DocumentAnalysis':
-                  imageUrl=instanceHistoryData.image;
-              default:
-                imageUrl=null;
-            }
-            const response = await axios.get(imageUrl, {
-              headers: {
-                'Authorization': 'Token ' + localStorage.getItem('token')
-              },
-              responseType: 'arraybuffer'
-            });
-            const blob = new Blob([response.data], { type: 'image/png' });
-            const objectUrl = URL.createObjectURL(blob);
-            setImageUrl(objectUrl);
-          } catch (error) {
+              var imageUrl=null;
+              switch(featureName){
+                case 'pdfConversion':
+                    imageUrl=instanceHistoryData.pages[0].image;
+                    break;
+                case 'tableExtraction':
+                    imageUrl=instanceHistoryData.image;
+                    break;
+                case 'DocumentAnalysis':
+                    imageUrl=instanceHistoryData.image;
+                default:
+                  imageUrl=null;
+              }
+              const response = await axios.get(imageUrl, {
+                headers: {
+                  'Authorization': 'Token ' + localStorage.getItem('token')
+                },
+                responseType: 'arraybuffer'
+              });
+              const blob = new Blob([response.data], { type: 'image/png' });
+              const objectUrl = URL.createObjectURL(blob);
+              setImageUrl(objectUrl);
+          } 
+          catch (error) {
+            showAlert(error,'red')
             console.error('Error fetching image:', error);
           }
         };

@@ -42,39 +42,27 @@ export function Register(){
         setEyeStatus(!eyeStatus);
     }
     const submitForm=async(event)=>{
-        event.preventDefault()
-        if(!isPasswordValid(document.getElementById('password').value,document.getElementById('confirm-password').value)){
-            return false;
-        }
-        activate_loader(true)
-        let csrf_token
-        await axios.get(base_url+'api/get-csrf-token/')
-        .then((response)=>{
-            csrf_token=response.data.csrf_token
-            console.log('asd')
-            console.log(response)
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
-        console.log(csrf_token)
-        console.log(userInfo)
-        await axios.post(base_url+'api/users/',userInfo,{
-            headers:{
-                'X-CSRFToken': csrf_token
+        try{
+            event.preventDefault()
+            if(!isPasswordValid(document.getElementById('password').value,document.getElementById('confirm-password').value)){
+                return false;
             }
-        })
-        .then((response)=>{
+            activate_loader(true)
+            let csrf_token
+            const response =await axios.get(base_url+'api/get-csrf-token/')
+            csrf_token=response.data.csrf_token
+            const response2=axios.post(base_url+'api/users/',userInfo,{headers:{'X-CSRFToken': csrf_token}})
             setIsRegistered(true)
-            activate_loader(false)
-            console.log(response.data)
-        })
-        .catch((error)=>{
+        }
+        catch(error){
             const error_dict=error.response.data
             if('username' in error_dict && 'email' in error_dict) showAlert(error.response.data['username']+' and '+error.response.data['email'],'red')
             else if('username' in error_dict) showAlert(error_dict['username'],'red')
             else showAlert(error_dict['email'],'red')
-        })
+        }
+        finally{
+            activate_loader(false)
+        }
     }
     return(
         <div className="form-container">

@@ -3,6 +3,7 @@ import { MdAddCall } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";import { MdOutlineMail } from "react-icons/md";
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useState } from 'react';
+import {showAlert} from '../components/AlertLoader/index'
 export const ContactUs = () => {
     const [mapLoaded, setMapLoaded] = useState(false);
 
@@ -21,18 +22,25 @@ export const ContactUs = () => {
       console.log('Map loaded successfully');
     };
   const submitContactUsForm=(event)=>{
-    event.preventDefault();
-    clearErrors();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value.trim();
-    const terms = document.getElementById('terms').checked;
-    let isValid = true;
-    if (isValid) {
-        alert('Message sent successfully!');
-        // Form is valid, you can now send the data to the server or handle it as required
+    try{
+      event.preventDefault();
+      clearErrors();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+      const terms = document.getElementById('terms').checked;
+      let isValid = true;
+      if (isValid) {
+          alert('Message sent successfully!');
+          // Form is valid, you can now send the data to the server or handle it as required
+      }
     }
+    catch(error){
+      showAlert(error,'red');
+      console.log(error)
+    }
+
 };
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -29,22 +29,29 @@ export const TableExtractionHistory=()=>{
         }
     }
     const downloadFile=async(instanceFile)=>{
-        const excelData=[]
-        instanceFile.table.forEach((value,index)=>{excelData.push(JSON.parse(value))})
-        const tableData={};
-        excelData.forEach((value,index)=>tableData[index]=value);
-        const worksheets=[];
-        Object.keys(excelData).map((key)=>{
-            const dataArray=Object.values(excelData[key]).map((row)=>row)
-            const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
-            worksheets.push({name:key,data:worksheet})
-        })
-        
-        const workbook=XLSX.utils.book_new();
-        worksheets.forEach((worksheet,i)=>{
-            XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
-        })
-        XLSX.writeFile(workbook, "table extraction.xlsx");
+        try{
+            const excelData=[]
+            instanceFile.table.forEach((value,index)=>{excelData.push(JSON.parse(value))})
+            const tableData={};
+            excelData.forEach((value,index)=>tableData[index]=value);
+            const worksheets=[];
+            Object.keys(excelData).map((key)=>{
+                const dataArray=Object.values(excelData[key]).map((row)=>row)
+                const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
+                worksheets.push({name:key,data:worksheet})
+            })
+            
+            const workbook=XLSX.utils.book_new();
+            worksheets.forEach((worksheet,i)=>{
+                XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
+            })
+            XLSX.writeFile(workbook, "table extraction.xlsx");
+        }
+        catch(error){
+            showAlert(error,'red')
+            console.log(error)
+        }
+
     }
     useEffect(()=>{
         getMoreData();
