@@ -1,32 +1,7 @@
-import { useState,useEffect } from "react"
+import { useState} from "react"
 import {AccountUpdate,PasswordAndSecurity} from '.'
-import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
-import { setUserInfo,setToken,setIsLogin } from "../../../state/UserInformation/ProfileSlice"
-import { showAlert } from "../../AlertLoader"
 export const SettingMainPage=()=>{
     const [component,setComponent]=useState('accountUpdate')
-    const dispatch=useDispatch()
-    const baseUrl=useSelector((state)=>state.baseUrl).backend
-    useEffect(()=>{
-        try{
-          if(localStorage.getItem('token')){
-            const getUserInfo=async()=>{
-              console.log(localStorage.getItem('token'))
-              const response=await axios.get(baseUrl+'api/users/get-user-info/',
-                {headers:{
-                'Authorization':'Token '+localStorage.getItem('token')
-              }})
-              dispatch(setUserInfo(response.data))
-            }
-            getUserInfo();
-          }
-        }
-        catch(error){
-          console.log(error)
-          showAlert(error,'red')
-        }
-      },[])
     const renderComponent=()=>{
         switch(component){
             case 'accountUpdate':

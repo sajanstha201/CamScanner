@@ -24,7 +24,6 @@ export const ContactUs = () => {
   const submitContactUsForm=(event)=>{
     try{
       event.preventDefault();
-      clearErrors();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value;
