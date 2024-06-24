@@ -1,21 +1,20 @@
 import './App.css';
-import {Navbar,UserNavbar,MobileNavbar} from './components/Navbars'
-import {Route,Routes, useLocation,Navigate} from 'react-router-dom'
+import {Navbar} from './components/Navbars'
+import {Route,Routes, useLocation} from 'react-router-dom'
 import {Login,Register,Logout, ForgotPassword,OTP} from './webpage/Login-Register'
 import { PdfConversion, TableExtraction } from './components/Features';
 import {Home,AboutUs,ContactUs, Feature} from './webpage'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
 import { DisplayExcel, DisplayPdf } from './components/ShowResult';
-import { useMediaQuery } from 'react-responsive';
 import {BlankPage,NoPageFound} from './webpage/BlankPage'
-import { Profile ,Notification} from './components/User';
+import { Profile} from './components/User';
 import { SettingMainPage } from './components/User/Setting';
 import { HistoryMainPage } from './components/User/History';
 import { Support } from './components/User/Support';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer'
-import { setIsLogin, setToken, setUserInfo } from './state/UserInformation/ProfileSlice'
+import { setIsLogin, setToken, setUserInfo,setPhotoSrc } from './state/UserInformation/ProfileSlice'
 import { Testing } from './Testing';
 import axios from 'axios';
 import { showAlert } from './components/AlertLoader';
@@ -24,7 +23,6 @@ function App() {
   const showResult=location.pathname.startsWith('/display')
   const blankPageActivate=location.pathname.startsWith('/blank')
   const antiNav=location.pathname.startsWith('/anti-nav')
-  const isMobile=useMediaQuery({query:'(max-width: 767px)'})
   const userInfo=useSelector((state)=>state.userProfile)
   const dispatch=useDispatch();
   const baseUrl=useSelector((state)=>state.baseUrl).backend
@@ -33,13 +31,37 @@ function App() {
       if(localStorage.getItem('token')){
         dispatch(setToken(localStorage.getItem('token')))
         dispatch(setIsLogin(true))
+        const getUserInfo=async()=>{
+        const response=await axios.get(baseUrl+'api/users/get-user-info/',
+          {headers:{
+          'Authorization':'Token '+localStorage.getItem('token')
+        }})
+        console.log('Response from profile section',response.data)
+        dispatch(setUserInfo(response.data))
+        const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
+        setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' })));
+        }
+        if(!localStorage.getItem('isUserInfoLoaded')){
+          console.log('uploading the userInfo')
+          getUserInfo();
+          localStorage.setItem('isUserInfoLoaded','true')
+        }
+        else{
+          console.log('userinfo: ',userInfo)
+          console.log('userinfo is already uploaded')
+        }
+        
       }
+      window.addEventListener('beforeunload', () => {
+        localStorage.removeItem('isUserInfoLoaded')
+      });
+      
     }
     catch(error){
       console.log(error)
       showAlert(error,'red')
     }
-  },[])
+  })
   return (
     <div className="App">
       <div id="alert-container"></div>

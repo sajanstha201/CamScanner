@@ -1,44 +1,13 @@
-import { setUserInfo,setIsLogin,setToken } from "../../state/UserInformation/ProfileSlice"
-import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { showAlert } from "../AlertLoader"
+import { useSelector } from "react-redux"
 export const Profile=()=>{
     const userInfo=useSelector(state=>state.userProfile)
-    const dispatch=useDispatch()
-    const baseUrl=useSelector((state)=>state.baseUrl).backend
-    const [userImage,setUserImage]=useState()
-    useEffect(()=>{
-        try{
-          if(localStorage.getItem('token')){
-            const getUserInfo=async()=>{
-              console.log(localStorage.getItem('token'))
-              
-              const response=await axios.get(baseUrl+'api/users/get-user-info/',
-                {headers:{
-                'Authorization':'Token '+localStorage.getItem('token')
-              }})
-              console.log('Response from profile section',response.data)
-              dispatch(setUserInfo(response.data))
-              const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
-              console.log(imageResponse.data)
-              setUserImage(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' })));
-            }
-            getUserInfo();
-          }
-        }
-        catch(error){
-          console.log(error)
-          showAlert(error,'red')
-        }
-      },[])
     return(
         <>
            <div className="w-full  bg-gray-100 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 min-h-[80vh]">
              <div className=" w-full lg:w-3/5 h-7/5 flex flex-col gap-4  ">
                   <div className="w-full bg-white flex flex-wrap justify-between gap-5 py-3 px-10 items-center rounded-sm">
                      <div className="flex items-center gap-7 flex-wrap">
-                           <img src={userImage} className="h-24 rounded-full" alt=""/>
+                           <img src={userInfo.photoSrc} className="h-24 rounded-full" alt=""/>
                             <div className="">
                                 <h1  className="text-xl font-bold">{userInfo.username}</h1>
                             </div>

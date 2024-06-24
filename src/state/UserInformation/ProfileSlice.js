@@ -1,6 +1,4 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 
 export const ProfileSlice=createSlice({
     name:'user_profile',
@@ -11,7 +9,7 @@ export const ProfileSlice=createSlice({
         'last_name':'',
         'token':'',
         'id':'',
-        'photo':'',
+        'photoSrc':'',
         'contact':'',
         'isLogin':false
     },
@@ -25,14 +23,16 @@ export const ProfileSlice=createSlice({
             state.email=userInfo.email;
             state.first_name=userInfo.first_name;
             state.last_name=userInfo.last_name;
-            state.photo=userInfo.photo;
             state.id=userInfo.id;
             state.contact=userInfo.contact;
         },
         setToken:(state,action)=>{
             state.token='Token '+action.payload
         },
+        setPhotoSrc:(state,action)=>{
+            state.photoSrc=action.payload
+        }
     }
 })
 export default ProfileSlice.reducer;
-export const {setIsLogin,setUserInfo,setToken}=ProfileSlice.actions
+export const {setIsLogin,setUserInfo,setToken,setPhotoSrc}=ProfileSlice.actions
