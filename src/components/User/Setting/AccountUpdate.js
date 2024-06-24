@@ -4,12 +4,14 @@ import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { activate_loader, showAlert } from "../../AlertLoader"
 import axios from "axios"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { setUserInfo,setPhotoSrc, setToken, setIsLogin } from "../../../state/UserInformation/ProfileSlice"
 export const AccountUpdate=()=>{
     const [isImageUploaded,setIsImageUploaded]=useState(false)
     const [userImage,setUserImage]=useState()
     const baseUrl=useSelector((state)=>state.baseUrl).backend
     const userInfo=useSelector((state)=>state.userProfile)
+    const dispatch=useDispatch()
     const checkImageUpload=()=>{
         const imageFiles=document.getElementById('user-pic-update').files;
         if(imageFiles.length!==0){
@@ -27,7 +29,11 @@ export const AccountUpdate=()=>{
             const imageFormData=new FormData();
             imageFormData.append('photo',inputImage);
             const response=await axios.patch(baseUrl+'api/users/'+userInfo.id+'/',imageFormData,{headers:{'Authorization':userInfo.token}})
-            showAlert('successfully uploaded the photo','green')
+            console.log('image updation response',response.data)
+            const imageResponse=await axios.get(response.data.photo,{responseType: 'arraybuffer'})
+            console.log('image response',imageResponse.data)
+            dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+            showAlert('successfully changed the photo','green')
         }
         catch(error){
             console.log(error)
@@ -44,6 +50,10 @@ export const AccountUpdate=()=>{
             const response=await axios.patch(baseUrl+'api/users/'+userInfo.id+'/',{
                 [e.target.previousSibling.id]:e.target.previousSibling.value
             },{headers:{'Authorization':userInfo.token}})
+            dispatch(setUserInfo(response.data))
+            dispatch(setToken(localStorage.getItem('token')))
+            dispatch(setIsLogin(true))
+            document.getElementById(e.target.previousSibling.id).value=''
         }
         catch(error){
             console.log(error)
