@@ -64,7 +64,7 @@ function App() {
   })
   return (
     <div className="App">
-      <div id="alert-container"></div>
+      <div id="alert-container" className='mt-10'></div>
       <div className='blur-box' id='blur-box'>
             <div className='loader-box' id='loader-box'></div>      
       </div>

@@ -45,7 +45,8 @@ export const TableExtractionHistory=()=>{
             worksheets.forEach((worksheet,i)=>{
                 XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
             })
-            XLSX.writeFile(workbook, "table extraction.xlsx");
+            console.log(instanceFile)
+            XLSX.writeFile(workbook, userInfo.username+instanceFile.created+".xlsx");
         }
         catch(error){
             showAlert(error,'red')

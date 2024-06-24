@@ -11,6 +11,7 @@ function UploadedFiles({files,setFiles,featureName}){
         const imageId=image.id.replace('-div','');
         if(featureName=='pdf-conversion') setFiles(prevFiles=>({...prevFiles,inputFiles:prevFiles.inputFiles.filter((_,index)=>index!==parseInt(imageId))}))
         else setFiles({inputFiles:[],result:[]})
+        setFiles(prevData=>({...prevData,result:[]}))
     }
     const handleDrop=(e,newIndex)=>{
         e.preventDefault();

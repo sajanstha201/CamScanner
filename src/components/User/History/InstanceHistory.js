@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import axios from "axios"
 import { showAlert } from "../../AlertLoader"
 export const InstanceHistory=({featureName,instanceHistoryData,downloadFile})=>{
+    const userInfo=useSelector((state)=>state.userProfile)
     const [imageUrl,setImageUrl]=useState('')
     useEffect(() => {
         const fetchImage = async () => {
@@ -47,7 +48,8 @@ export const InstanceHistory=({featureName,instanceHistoryData,downloadFile})=>{
                 </img>
             </div>
             <div className="absolute left-16 ">
-                {instanceHistoryData.file.split('/').pop()}
+                {featureName!=='tableExtraction'&&instanceHistoryData.file.split('/').pop()}
+                {featureName==='tableExtraction'&&userInfo.username+instanceHistoryData.created+'.xslx'}
             </div>
             <div className="absolute left-[50%] ">
                 {instanceHistoryData.created}

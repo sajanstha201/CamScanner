@@ -64,7 +64,7 @@ function DocumentAnalysis(){
             <h1>Document Analysis</h1>
             <Upload featureName={'document-analysis'} files={files} setFiles={setFiles}></Upload>
             {(files.result.length===0&&files.inputFiles.length!==0)&&<Button variant="success" size='lg' onClick={documentAnalysis} className="mt-4">Analyze</Button>}
-            {files.result.length!==0&&<Button onClick={downloadDoc} size='lg' className="mt-4">Download</Button>}
+            {files.result.length!==0&&<Button onClick={downloadDoc} size='lg' className="m-4">Download</Button>}
         </>
     );
 }

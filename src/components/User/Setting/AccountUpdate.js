@@ -58,7 +58,7 @@ export const AccountUpdate=()=>{
         <>
         <div className="w-full  bg-gray-100 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 ">
           <div className=" w-full lg:w-3/5 h-7/5 flex flex-col gap-4  ">
-               <div className="w-full bg-white flex flex-wrap justify-between gap-5 py-3 px-10 items-center rounded-sm">
+               <div className="w-full bg-white flex flex-wrap justify-between gap-5 py-3 px-10 items-center rounded-md">
                   <div className="flex items-center gap-7 flex-wrap">
                     <div className={`${!isImageUploaded?'':'hidden'} flex items-center gap-7 `}>
                         <label htmlFor='user-pic-update' style={{fontSize: '2em' }} className="flex items-center justify-center w-20 h-20 border border-black border-dotted rounded-full">
@@ -77,7 +77,7 @@ export const AccountUpdate=()=>{
                   </div>
                   <Button onClick={updateImage}>Update</Button>
                </div> 
-                  <div className="w-full h-full bg-white rounded-sm flex  flex-col p-9 justify-center  gap-8">
+                  <div className="w-full bg-white rounded-md flex  flex-col p-9 justify-center  gap-8">
                      <h1  className="text-xl font-bold flex justify-center">Account Update</h1>
                      <div className="flex flex-col gap-3">
                         <div className="w-[80%] flex sm:flex-col lg:flex-row md:flex-col gap-3">
