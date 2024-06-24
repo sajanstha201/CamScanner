@@ -59,7 +59,7 @@ export const PdfConversionHistory=()=>{
     },[])
     return(
         <div className="w-full flex justify-center">
-            <OneHistory featureName={'pdfConversion'} getMoreData={getMoreData} historyData={historyData} downloadFile={downloadFile}/>
+            <OneHistory featureName={'pdfConversion'} getMoreData={getMoreData} historyData={historyData} setHistoryData={setHistoryData} downloadFile={downloadFile}/>
         </div>
     )
 };

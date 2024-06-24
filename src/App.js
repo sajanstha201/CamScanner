@@ -36,21 +36,14 @@ function App() {
           {headers:{
           'Authorization':'Token '+localStorage.getItem('token')
         }})
-        console.log('Response from profile section',response.data)
         dispatch(setUserInfo(response.data))
         const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
-        setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' })));
+        dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
         }
         if(!localStorage.getItem('isUserInfoLoaded')){
-          console.log('uploading the userInfo')
           getUserInfo();
           localStorage.setItem('isUserInfoLoaded','true')
         }
-        else{
-          console.log('userinfo: ',userInfo)
-          console.log('userinfo is already uploaded')
-        }
-        
       }
       window.addEventListener('beforeunload', () => {
         localStorage.removeItem('isUserInfoLoaded')

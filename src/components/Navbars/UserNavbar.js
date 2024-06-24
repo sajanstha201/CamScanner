@@ -7,14 +7,14 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUser, faHistory, faCog, faBell, faQuestionCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 export const UserNavbar=()=>{
-    const userInfo=useSelector((state)=>state.user_profile)
+    const userInfo=useSelector((state)=>state.userProfile)
     const [showUserOffCanvas,setShowUserOffCanvas]=useState(false)
     return(
       <>
       <Nav>
           <Nav.Link>
               <img
-                  src={logo_image}
+                  src={userInfo.photoSrc}
                   alt="User DP"
                   className="user-dp"
                   id="user-dp1"
@@ -27,7 +27,7 @@ export const UserNavbar=()=>{
             <Offcanvas.Title >
                 <Nav.Link>
                     <img
-                        src={logo_image}
+                        src={userInfo.photoSrc}
                         alt="User DP"
                         className="user-dp"
                         id="user-dp1"

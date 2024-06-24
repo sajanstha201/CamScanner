@@ -87,7 +87,7 @@ export function Register(){
             <label htmlFor="confirm-password" className='confirm-password'>Confirm Password</label>
             <input id="confirm-password" name="confirm-password" type="password" required></input>
 
-            <button type="submit" onClick={submitForm}>Submit</button>
+            <button type="submit">Submit</button>
             <Link to='/login' style={{marginTop:'20px'}}>Already have an account?</Link>
         </form>
     </div>
