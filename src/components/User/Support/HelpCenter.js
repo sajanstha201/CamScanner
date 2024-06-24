@@ -24,7 +24,7 @@ export const HelpCenter=()=>{
 
 
 
-        <div className="bg-gray-100 min-h-screen">
+        <div className="bg-gray-100 min-h-screen w-full">
             <header className="container mx-auto py-8 px-4">
                 <h1 className="text-4xl font-extrabold mb-6 text-center text-blue-600">PDF Converter Help Center</h1>
             </header>

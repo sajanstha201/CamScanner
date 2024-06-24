@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState,useEffect } from "react";
 import * as XLSX from 'xlsx'
 import { Card ,Button} from "react-bootstrap";
+import { showAlert } from "../AlertLoader";
 export const DisplayExcel=()=>{
     const [excelData,setExcelData]=useState()
     const loc=useLocation();
@@ -11,31 +12,35 @@ export const DisplayExcel=()=>{
     const file=queryParameters.get('file')
     useEffect(()=>{
         try{
-        const fetchData= async()=>{
-            const response=await axios.get(file)
-            setExcelData(response.data)
-        }
-        fetchData();
+            const fetchData= async()=>{
+                const response=await axios.get(file)
+                console.log(response.data)
+                setExcelData(response.data)
+            }
+            fetchData();
         }
         catch(error){
             console.log(error)
         }   
     },[]);
     const downloadExcelFile=()=>{
-        console.log(excelData)
-        const worksheets=[];
-        Object.keys(excelData).map((key)=>{
-            const dataArray=Object.values(excelData[key]).map((row)=>row)
-            const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
-            worksheets.push({name:key,data:worksheet})
-        })
-        console.log(worksheets)
-        
-        const workbook=XLSX.utils.book_new();
-        worksheets.forEach((worksheet,i)=>{
-            XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
-        })
-        XLSX.writeFile(workbook, "table extraction.xlsx");
+        try{
+            const worksheets=[];
+            Object.keys(excelData).map((key)=>{
+                const dataArray=Object.values(excelData[key]).map((row)=>row)
+                const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
+                worksheets.push({name:key,data:worksheet})
+            })
+            const workbook=XLSX.utils.book_new();
+            worksheets.forEach((worksheet,i)=>{
+                XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
+            })
+            XLSX.writeFile(workbook, "table extraction.xlsx");
+        }
+        catch(error){
+            showAlert(error,'red')
+        }
+
     }
     return (
         <>

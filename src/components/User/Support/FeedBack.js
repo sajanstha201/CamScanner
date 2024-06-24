@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 export const FeedBack=()=>{
     const [isIssueActivate,setIsIssueAcitvate]=useState(true)
     return(
-        <div className="w-full">
+        <div className="w-full bg-gray-100">
             <div>
             <h1 className="ms-5">Feedback</h1>
     <div className="d-flex container alert col-9 ms-5">

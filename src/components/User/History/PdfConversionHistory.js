@@ -3,49 +3,63 @@ import { InstanceHistory } from "./InstanceHistory"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown,faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react";
-import { OneDayHistory } from "./OneDayHistory";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { AiOutlineFilePdf } from "react-icons/ai";
+import {showAlert} from '../../AlertLoader/index'
+import { OneHistory } from "./OneHistory";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 export const PdfConversionHistory=()=>{
-    const location=useLocation()
     const baseUrl=useSelector((state)=>state.baseUrl).backend
     const userInfo=useSelector((state)=>state.userProfile)
-    const [dropDown,setDropDown]=useState(true)
-    const historyDict=['sajan','shrerstha','country','nepal','city','kathmandu']
     const [historyData,setHistoryData]=useState([])
     const [nextUrl,setNextUrl]=useState(baseUrl + 'api/scanned-files/')
-    const getData=async()=>{
+    const getMoreData=async()=>{
         try{
-            const response = await axios.get(nextUrl,{
-                headers: { 'Authorization': 'Token '+localStorage.getItem('token') }
-            });
-            console.log(response.data)
-            setNextUrl(response.data.next)
-            setHistoryData(prevData=>[...prevData,...response.data.results])
+            if(nextUrl===null){
+                showAlert('No More History','red')
+            }
+            else{
+                const response = await axios.get(nextUrl,{
+                    headers: { 'Authorization': 'Token '+localStorage.getItem('token') }
+                });
+                setNextUrl(response.data.next)
+                setHistoryData(prevData=>[...prevData,...response.data.results])
+            }
         }
         catch(error){
             console.log(error)
         }
     }
+    const downloadFile=async(instanceFile)=>{
+        try{
+            const response=await axios.get(instanceFile.file,{
+                'Authorization':'Token '+localStorage.getItem('token'),
+                responseType:'arraybuffer'
+            });
+            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download =instanceFile.file.split('/').pop();
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        catch(error){
+            showAlert(error,'red');
+            console.log(error)
+        }
+
+    }
     useEffect(()=>{
-        getData();
-        setTimeout(()=>{console.log(historyData)},10000)
-    },[dropDown])
-    const h=['sajan','shrestha','alfdjl']
+        getMoreData();
+    },[])
     return(
-        <div className="bg-gray-200 w-full rounded-md flex flex-col items-start m-1 mb-3 shadow-sm">
-            <div className={`bg-gray-400 w-full lg:h-[50px]  items-center justify-between flex shadow-md ${dropDown?'rounded-t-md':'rounded-md '}`} onClick={()=>{setDropDown(!dropDown)}}>
-                <div className="pl-2">
-                    Pdf Conversion
-                </div>
-                <div  className="pr-2">
-                    <FontAwesomeIcon icon={dropDown?faChevronUp:faChevronDown}/>
-               </div>
-            </div>
-            <div style={{display:dropDown?'flex':'none'}} className="flex-wrap ">
-                {h.map((value,index)=>(<InstanceHistory instanceHistoryData={value}/>))}
-               </div>
+        <div className="w-full flex justify-center">
+            <OneHistory featureName={'pdfConversion'} getMoreData={getMoreData} historyData={historyData} downloadFile={downloadFile}/>
         </div>
     )
-}
+};

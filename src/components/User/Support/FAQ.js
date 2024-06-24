@@ -35,13 +35,8 @@ export const FAQ=()=>{
         };
     return(
         <>
-        
 
-
-
-
-    
-        <div className="max-w-screen- mx-auto bg-white p-6 rounded-lg mt-3 flex">
+        <div className="bg-gray-100 max-w-screen- mx-auto bg-white p-6 rounded-lg mt-3 flex">
             <div className='w-96'>
 
             <h1 className="text-center text-blue-500 text-3xl mb-8">FAQs for PDF Converter</h1>

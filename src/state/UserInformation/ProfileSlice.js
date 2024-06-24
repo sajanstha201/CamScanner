@@ -10,6 +10,9 @@ export const ProfileSlice=createSlice({
         'first_name':'',
         'last_name':'',
         'token':'',
+        'id':'',
+        'photo':'',
+        'contact':'',
         'isLogin':false
     },
     reducers:{
@@ -22,8 +25,9 @@ export const ProfileSlice=createSlice({
             state.email=userInfo.email;
             state.first_name=userInfo.first_name;
             state.last_name=userInfo.last_name;
-            state.token=userInfo.token;
-            state.token='Token '+state.token;
+            state.photo=userInfo.photo;
+            state.id=userInfo.id;
+            state.contact=userInfo.contact;
         },
         setToken:(state,action)=>{
             state.token='Token '+action.payload

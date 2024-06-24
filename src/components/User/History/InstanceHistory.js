@@ -1,19 +1,60 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDownload, faL } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
-export const InstanceHistory=({instanceHistoryData})=>{
-    const [isHover,setIsHover]=useState(false)
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import axios from "axios"
+import { showAlert } from "../../AlertLoader"
+export const InstanceHistory=({featureName,instanceHistoryData,downloadFile})=>{
+    const [imageUrl,setImageUrl]=useState('')
+    useEffect(() => {
+        const fetchImage = async () => {
+          try {
+              var imageUrl=null;
+              switch(featureName){
+                case 'pdfConversion':
+                    imageUrl=instanceHistoryData.pages[0].image;
+                    break;
+                case 'tableExtraction':
+                    imageUrl=instanceHistoryData.image;
+                    break;
+                case 'DocumentAnalysis':
+                    imageUrl=instanceHistoryData.image;
+                default:
+                  imageUrl=null;
+              }
+              const response = await axios.get(imageUrl, {
+                headers: {
+                  'Authorization': 'Token ' + localStorage.getItem('token')
+                },
+                responseType: 'arraybuffer'
+              });
+              const blob = new Blob([response.data], { type: 'image/png' });
+              const objectUrl = URL.createObjectURL(blob);
+              setImageUrl(objectUrl);
+          } 
+          catch (error) {
+            showAlert(error,'red')
+            console.error('Error fetching image:', error);
+          }
+        };
+    
+        fetchImage();
+      }, [instanceHistoryData.pages]);
     return(
-        <div className={`border ${isHover?'bg-gray-400':'bg-white'} shadow-md rounded-md w-[120px] h-[120px] m-3 flex items-center justify-center`}
-        onMouseEnter={()=>{setIsHover(true)}}
-        onMouseLeave={()=>{setIsHover(false)}}>
-            <div className={`${isHover?'hidden':'flex'}`}>
-                {instanceHistoryData}
+        <div className={`border bg-[white] hover:bg-gray-100 h-20 w-full flex  items-center jusitfy-center  relative cursor-pointer`}>
+            <div className="absolute left-2 h-full w-10  flex  items-center jusitfy-center ">
+                <img src={imageUrl} alt={instanceHistoryData.id}>
+                </img>
             </div>
-            <div className={`${isHover?'flex':'hidden'}`}>
-                <FontAwesomeIcon icon={faDownload}/>
+            <div className="absolute left-16 ">
+                {instanceHistoryData.file.split('/').pop()}
             </div>
-
+            <div className="absolute left-[50%] ">
+                {instanceHistoryData.created}
+            </div>  
+            <div className="absolute right-3 ">
+                    <FontAwesomeIcon icon={faDownload} onClick={()=>{downloadFile(instanceHistoryData)}}/>
+            </div>
         </div>
     )
 }
