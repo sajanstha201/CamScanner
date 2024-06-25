@@ -1,13 +1,36 @@
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus ,faCircle } from '@fortawesome/free-solid-svg-icons';
+import {showAlert} from '../../AlertLoader/index'
+import axios from "axios";
+import { useSelector } from "react-redux";
 export const Report=()=>{
     const [reportImage,setReportImage]=useState([])
     const [reportDescription,setReportDescription]=useState('')
-    const [email,setEmail]=useState()
-    const submitReport=()=>{
-        console.log('slkajsdfkjl')
-        console.log(reportImage,reportDescription,email)
+    const baseUrl=useSelector((state)=>state.baseUrl).backend
+    const userInfo=useSelector((state)=>state.userProfile)
+    const submitReport=async ()=>{
+        try{
+            const imageDataForm=new FormData();
+            reportImage.forEach((value)=>imageDataForm.append('images',value));
+            const response=await axios.post(baseUrl+'api/bug-report/',{
+                'user':userInfo.id,
+                'images':imageDataForm,
+                'description':reportDescription
+            },{
+                headers:{
+                    'Authorization':userInfo.token
+                }
+            })
+            console.log(response)
+            showAlert("Bug Reprot have been successfully saved.",'green')
+            setReportImage([]);
+            document.getElementById('message').value='';
+        }  
+        catch(error){
+            console.log(error)
+            showAlert(error,'red')
+        }
     }
     return(
         <>
@@ -56,14 +79,10 @@ export const Report=()=>{
                 </>}
             </div>
         </div>
-        
-           <div className="flex items-center justify-center ">
-           <label className="mr-5">Email: </label>
-            <input className="h-10 rounded-md border w-96 p-4" placeholder="Email " type="email" onChange={(e)=>setEmail(e.target.value)}/>
-           </div>
+    
         <br/>
          <div className="flex w-full justify-center ">
-              <button className="px-7 py-2 bg-blue-900 text-white font-semibold rounded-md" onClick={submitReport}>Submit Report !</button>
+              <button className="px-7 py-2 bg-blue-600 text-white font-semibold rounded-md" onClick={submitReport}>Submit Report !</button>
          </div>
        
     </div>

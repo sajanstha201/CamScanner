@@ -14,10 +14,11 @@ export const FeedBack=()=>{
        
     </div>
             </div>
-            <Button className="mr-5" onClick={()=>setIsIssueAcitvate(true)}>Report</Button>
+            {/*<Button className="mr-5" onClick={()=>setIsIssueAcitvate(true)}>Report</Button>
             <Button onClick={()=>setIsIssueAcitvate(false)}>Suggestion</Button>
-            {isIssueActivate&&<Report/>}
-            {!isIssueActivate&&<Suggestion/>}
+           
+            {!isIssueActivate&&<Suggestion/>}*/}
+             {isIssueActivate&&<Report/>}
         </div>
     )
 }
