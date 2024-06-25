@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import  aboutimg from '../../src/static/images/concept-landing-page-transfer-concept.png'
+import  aboutimg3 from '../../src/static/images/text-files-concept-illustration.png'
 import  aboutimg2 from '../../src/static/images/copywriting-social-media-post-content-marketing-internet-commercial-cartoon-character-writing-text-advertising-promotional-strategy.png'
 import { GiProgression } from "react-icons/gi";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -83,11 +84,15 @@ export const AboutUs = () => {
 
        <div className='w-full flex flex-wrap flex-col gap-11 '>
        <div className='w-full flex items-center justify-center'>
-               <img src={aboutimg}  className='h-96 w-96 flex justify-center ' />
+               <img src={aboutimg}  sizes='14' />
                </div>
-               <div className='w-full flex items-center justify-center'>
+               <div className='w-full flex items-center justify-center '>
 
-               <img src={aboutimg2}  className='h-80 w-96' />
+               <img src={aboutimg3}  sizes='14' />
+               </div>
+               <div className='w-full flex items-center justify-center '>
+
+               <img src={aboutimg2}  sizes='14'/>
                </div>
                
                
