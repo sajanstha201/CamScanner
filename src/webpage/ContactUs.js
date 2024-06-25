@@ -4,9 +4,11 @@ import { IoLocationSharp } from "react-icons/io5";import { MdOutlineMail } from 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useState } from 'react';
 import {showAlert} from '../components/AlertLoader/index'
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 export const ContactUs = () => {
     const [mapLoaded, setMapLoaded] = useState(false);
-
+    const baseUrl=useSelector((state)=>state.baseUrl).backend
     const defaultCenter = {
       lat: 27.681505372996934,
       lng: 85.32804964028425
@@ -21,19 +23,21 @@ export const ContactUs = () => {
       setMapLoaded(true);
       console.log('Map loaded successfully');
     };
-  const submitContactUsForm=(event)=>{
+  const submitContactUsForm=async(event)=>{
     try{
       event.preventDefault();
+      console.log('sklfjasdlf')
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value.trim();
-      const terms = document.getElementById('terms').checked;
-      let isValid = true;
-      if (isValid) {
-          alert('Message sent successfully!');
-          // Form is valid, you can now send the data to the server or handle it as required
-      }
+      const description = document.getElementById('message').value.trim();
+      const response=await axios.post(baseUrl+'api/contact-form/',{
+          name:name,
+          email:email,
+          subject:subject,
+          description:description
+      })
+      showAlert('We will reach you out shortly.','green')
     }
     catch(error){
       showAlert(error,'red');
@@ -71,12 +75,12 @@ function clearErrors() {
          <div className=' mt-7 '>
               <div className=' text-sm flex px-5 gap-4'>
                   <IoLocationSharp className='h-6 w-6'/>
-                <p className='hover:underline'>Sankhamul,kathmandu</p>
+                <p className='hover:underline'>M8JH+M52 Lalitpur, Nepal</p>
               </div>
               <div className=' text-sm flex px-5 gap-4'>
               
                <MdAddCall className='h-6 w-6'/>
-                <p className='hover:underline'>+977 9745384280</p>
+                <p className='hover:underline'>+977 9861190705</p>
               </div>
               <div className=' text-sm flex px-5 gap-4'>
                  <MdOutlineMail className='h-6 w-6'/>
@@ -104,7 +108,7 @@ function clearErrors() {
                             <p id="emailError" className="error hidden">Please enter a valid email address.</p>
                         </div>
                         <div>
-                             <input type='text' placeholder='write a subject' className='mt-1 block w-48 border  rounded-md shadow-sm p-2 border-gray-950'required/>
+                             <input type='text' id='subject' placeholder='write a subject' className='mt-1 block w-48 border  rounded-md shadow-sm p-2 border-gray-950'required/>
                             <p id="subjectError" className="error hidden">Please choose a subject.</p>
                         </div>
                 </div>
