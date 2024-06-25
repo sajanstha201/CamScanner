@@ -22,8 +22,8 @@ export const Navbar=()=>{
                 <img
                     src={logo_image}
                     alt="Logo"
-                    width="50"
-                    height="50"
+                    width="80"
+                    height="80"
                     className="d-inline-block align-top"
                 />{' '}
             </NavbarB.Brand>
