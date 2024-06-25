@@ -59,7 +59,7 @@ export const DocumentAnalysisHistory=()=>{
     },[])
     return(
         <div className="w-full flex justify-center">
-            <OneHistory featureName={'tableExtraction'} getMoreData={getMoreData} historyData={historyData} downloadFile={downloadFile}/>
+            <OneHistory featureName={'tableExtraction'} getMoreData={getMoreData} historyData={historyData} setHistoryData={setHistoryData} downloadFile={downloadFile}/>
         </div>
     )
 }

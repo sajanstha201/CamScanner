@@ -4,12 +4,13 @@ import { Link ,Navigate} from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {activate_loader,showAlert} from '../../components/AlertLoader/index'
-import { setIsLogin ,setToken,setUserInfo} from '../../state/UserInformation/ProfileSlice';
+import { setIsLogin ,setPhotoSrc,setToken,setUserInfo} from '../../state/UserInformation/ProfileSlice';
 export function Login(){
     const user_profile=useSelector((state)=>state.userProfile)
     const dispatch=useDispatch()
     const base_url=useSelector((state)=>state.baseUrl.backend)
     const [userLoginInfo,setuserLoginInfo]=useState({'username':'','password':''})
+    const baseUrl=useSelector((state)=>state.baseUrl).backend
     if(user_profile.isLogin){
         activate_loader(false);
         showAlert('Successfully login','green')
@@ -18,22 +19,25 @@ export function Login(){
     const handleChange=(event)=>{
         setuserLoginInfo({...userLoginInfo,[event.target.name]:event.target.value})
     }
-    const submitForm=async()=>{
+    const submitForm=async(e)=>{
+        e.preventDefault()
         activate_loader(true)
         try{
         const response=await axios.get(base_url+'api/get-csrf-token/')
         const csrf_token=response.data.csrf_token
-        await axios.post(base_url+'api/login/',userLoginInfo)
-        .then((response)=>{
-            dispatch(setUserInfo(response.data))
-            console.log(response.data)
-            dispatch(setToken(response.data.token))
-            dispatch(setIsLogin(true))
-            localStorage.setItem('token',response.data.token)
-        })
+        const response2=await axios.post(base_url+'api/login/',userLoginInfo)
+        console.log(response2)
+        dispatch(setUserInfo(response2.data))
+        console.log(response2.data)
+        dispatch(setToken(response2.data.token))
+        dispatch(setIsLogin(true))
+        const imageResponse=await axios.get(baseUrl+response2.data.photo.substr(1),{responseType: 'arraybuffer'})
+        dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+        localStorage.setItem('token',response2.data.token)
         }
         catch(error){
-            showAlert(error,'red')
+            showAlert('Unable to login ','red')
+            console.log(error)
         }
         finally{
             activate_loader(false)
@@ -41,16 +45,16 @@ export function Login(){
     }
     return(
         <div className="login-container">
-            <div className="login-form"  >
+            <form className="login-form"  onSubmit={submitForm}>
                 <h2>Login</h2>
                 <label htmlFor="email">Username</label>
                 <input id='username' name='username' type='text' onChange={handleChange} required></input>
                 <label htmlFor="password">Password</label>
                 <input id='password' name='password' type='password' onChange={handleChange}required></input>
-                <button type='submit' onClick={submitForm}>Login</button>
+                <button type='submit'>Login</button>
                 <Link to='/register' style={{marginTop:'20px'}}>Don't have an account?</Link>
                 <Link to='/anti-nav/otp'>Forgot Password?</Link>
-            </div>
+            </form>
         </div>
 
     );

@@ -32,9 +32,9 @@ export const PasswordAndSecurity=()=>{
         }
     }
     return(
-        <div className="flex justify-center w-full bg-gray-100 h-full p-10">
-        <div className="bg-white rounded-xl">
-      <div className="p-10 flex items-start flex-col gap-3">
+        <div className="flex justify-center w-full bg-gray-100 p-10">
+        <div className=" ">
+      <div className="p-10 flex items-start flex-col gap-3 bg-white rounded-xl">
             <h2>Change Password</h2>
             <div className="flex items-start flex-col">
                 <label>Old Password</label>

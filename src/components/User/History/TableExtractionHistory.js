@@ -45,7 +45,8 @@ export const TableExtractionHistory=()=>{
             worksheets.forEach((worksheet,i)=>{
                 XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
             })
-            XLSX.writeFile(workbook, "table extraction.xlsx");
+            console.log(instanceFile)
+            XLSX.writeFile(workbook, userInfo.username+instanceFile.created+".xlsx");
         }
         catch(error){
             showAlert(error,'red')
@@ -58,7 +59,7 @@ export const TableExtractionHistory=()=>{
     },[])
     return(
         <div className="w-full flex justify-center">
-            <OneHistory featureName={'tableExtraction'} getMoreData={getMoreData} historyData={historyData} downloadFile={downloadFile}/>
+            <OneHistory featureName={'tableExtraction'} getMoreData={getMoreData} historyData={historyData} setHistoryData={setHistoryData} downloadFile={downloadFile}/>
         </div>
     )
 }
