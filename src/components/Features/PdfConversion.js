@@ -19,15 +19,27 @@ export function PdfConversion() {
         files.inputFiles.forEach(file => imageFormData.append('images', file));
         try {
             console.log(userProfile)
-            
-            const response = await axios.post(baseUrl + 'api/scanned-files/', imageFormData, {
-                headers: { 'Authorization': userProfile.token }
-            });
-            setResultDetail(response.data);
-            const pdfResponse = await axios.get(baseUrl + response.data.file.substring(1) + '/', {
-                headers: { 'Authorization': userProfile.token },
-            });
-            setFiles(prevData=>({...prevData,result:[pdfResponse.data]}))
+            if(userProfile.isLogin){
+                const response = await axios.post(baseUrl + 'api/scanned-files/', imageFormData, {
+                    headers: { 'Authorization': userProfile.token }
+                });
+                setResultDetail(response.data);
+                const pdfResponse = await axios.get(baseUrl + response.data.file.substring(1) + '/', {
+                    headers: { 'Authorization': userProfile.token },
+                });
+                setFiles(prevData=>({...prevData,result:[pdfResponse.data]}))
+            }
+            else{
+                const response=await axios.post(baseUrl+'api/guest-scanned-files/',imageFormData,{
+                    'cookies':localStorage.getItem("cookies")
+                })
+                setResultDetail(response.data);
+                console.log(response)
+                localStorage.setItem('cookies',response.data.cookies)
+                const pdfResponse = await axios.get(baseUrl + response.data.file.substring(1) + '/',);
+                setFiles(prevData=>({...prevData,result:[pdfResponse.data]}))
+            }
+
 
         } catch (error) {
             console.log(error)

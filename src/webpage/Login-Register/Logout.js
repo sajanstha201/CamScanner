@@ -3,7 +3,17 @@ import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { setIsLogin, setUserInfo } from "../../state/UserInformation/ProfileSlice";
 import { showAlert } from "../../components/AlertLoader";
+import { usePdfConversionFile,useTableExtractionFile,useDocumentAnalysisFile } from "../../context/AppProvider";
 export const Logout=()=>{
+    const {pdfConversionFile,setPdfConversionFile}=usePdfConversionFile()
+    const {tableExtractionFile,setTableExtractionFile}=useTableExtractionFile()
+    const {documentAnalysisFile,setDocumentAnalysisFile}=useDocumentAnalysisFile()
+    useEffect(()=>{
+       setPdfConversionFile({'inputFiles':[],'result':[]})
+        setTableExtractionFile({'inputFiles':[],'result':[]})
+        setDocumentAnalysisFile({'inputFiles':[],'result':[]})
+    })
+
     const userInfo={
         username:'',
         email:'',

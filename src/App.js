@@ -32,13 +32,16 @@ function App() {
         dispatch(setToken(localStorage.getItem('token')))
         dispatch(setIsLogin(true))
         const getUserInfo=async()=>{
-        const response=await axios.get(baseUrl+'api/users/get-user-info/',
-          {headers:{
-          'Authorization':'Token '+localStorage.getItem('token')
-        }})
-        dispatch(setUserInfo(response.data))
-        const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
-        dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+            const response=await axios.get(baseUrl+'api/users/get-user-info/',
+              {headers:{
+              'Authorization':'Token '+localStorage.getItem('token')
+            }})
+            dispatch(setUserInfo(response.data))
+
+            if(response.data.photo){
+              const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
+              dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+            }
         }
         if(!localStorage.getItem('isUserInfoLoaded')){
           getUserInfo();

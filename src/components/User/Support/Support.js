@@ -2,7 +2,7 @@ import { useState } from "react"
 import { HelpCenter,FeedBack,FAQ} from "."
 
 export const Support=()=>{
-    const [component,setComponent]=useState('helpCenter')
+    const [component,setComponent]=useState('feedBack')
     const renderComponent=()=>{
         switch(component){
             case 'faq':
