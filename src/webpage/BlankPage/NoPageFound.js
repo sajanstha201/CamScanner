@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../../static/images/logo.jpg'
 export const NoPageFound=()=>{
     return(
@@ -10,6 +11,9 @@ export const NoPageFound=()=>{
             </div>   
             <div className="col text-center flex justify-center mt-5 ">
                 <img src={logo} className='w-40 h-40'></img>
+            </div>
+            <div>
+                <Link to="/login" style={{textDecoration:'none'}}>Login</Link>
             </div>
         </div>
     )

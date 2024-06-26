@@ -26,17 +26,23 @@ export function Login(){
         const response=await axios.get(base_url+'api/get-csrf-token/')
         const csrf_token=response.data.csrf_token
         const response2=await axios.post(base_url+'api/login/',userLoginInfo)
-        console.log(response2)
         dispatch(setUserInfo(response2.data))
-        console.log(response2.data)
         dispatch(setToken(response2.data.token))
         dispatch(setIsLogin(true))
-        const imageResponse=await axios.get(baseUrl+response2.data.photo.substr(1),{responseType: 'arraybuffer'})
-        dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+        if(response2.data.photo){
+            const imageResponse=await axios.get(baseUrl+response2.data.photo.substr(1),{responseType: 'arraybuffer'})
+            dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
+        }
         localStorage.setItem('token',response2.data.token)
         }
         catch(error){
-            showAlert('Unable to login ','red')
+            console.log(error)
+            try{
+                showAlert(error.response.data.non_field_errors,'red')
+            }
+            catch(e){
+                showAlert(error.response.data.error,'red')
+            }
             console.log(error)
         }
         finally{

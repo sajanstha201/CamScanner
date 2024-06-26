@@ -61,6 +61,7 @@ export function Register(){
             else showAlert(error_dict['email'],'red')
         }
         finally{
+            showAlert('Check You Email For Verification','green')
             activate_loader(false)
         }
     }
