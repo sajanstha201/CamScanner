@@ -41,7 +41,14 @@ export function Login(){
                 showAlert(error.response.data.non_field_errors,'red')
             }
             catch(e){
-                showAlert(error.response.data.error,'red')
+                try{
+                    showAlert(error.response.data.error,'red')
+                }
+                catch(e1){
+                    console.log(e1)
+                    showAlert('unable to login','red')
+                }
+                
             }
             console.log(error)
         }
