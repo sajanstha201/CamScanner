@@ -14,3 +14,7 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.hover-scale:hover {
+  transform: scale(1.5);
+  transition: transform 0.2s;
+}

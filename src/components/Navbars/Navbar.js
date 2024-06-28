@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {UserNavbar} from './UserNavbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faQuestionCircle, faEnvelope, faDownload,faLifeRing, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Navbar as NavbarB,Nav,Container } from 'react-bootstrap';
-import { AiOutlineFilePdf, AiOutlineTable, AiOutlineFileText } from 'react-icons/ai';
+import { AiOutlineFilePdf, AiOutlineTable, AiOutlineFileText, AiOutlinePicture } from 'react-icons/ai';
 import { NavItemWithIcon } from './NavItemWithIcon';
 export const Navbar=()=>{
     const userInfo=useSelector((state)=>state.userProfile)
@@ -34,6 +34,7 @@ export const Navbar=()=>{
                     {userInfo.isLogin&&(<>
                         <NavItemWithIcon to={'/table-extraction'} icon={<AiOutlineTable/>} currentPath={loc}>Table Extraction</NavItemWithIcon>
                         <NavItemWithIcon to={'/document-analysis'} icon={<AiOutlineFileText/>} currentPath={loc}>Document Analysis</NavItemWithIcon>
+                        <NavItemWithIcon to={'/image-conversion'} icon={<AiOutlinePicture/>} currentPath={loc}>ImageConversion</NavItemWithIcon>
                     </>
                     )}
                 <NavItemWithIcon to={'/about-us'} icon={<FontAwesomeIcon icon={ faInfoCircle} />} currentPath={loc}>About Us</NavItemWithIcon>

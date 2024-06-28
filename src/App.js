@@ -2,7 +2,7 @@ import './App.css';
 import {Navbar} from './components/Navbars'
 import {Route,Routes, useLocation} from 'react-router-dom'
 import {Login,Register,Logout, ForgotPassword,OTP} from './webpage/Login-Register'
-import { PdfConversion, TableExtraction } from './components/Features';
+import { ImageConversion, PdfConversion, TableExtraction } from './components/Features';
 import {Home,AboutUs,ContactUs, Feature} from './webpage'
 import { useEffect } from 'react';
 import DocumentAnalysis from './components/Features/DocumentAnalysis';
@@ -32,6 +32,7 @@ function App() {
         dispatch(setToken(localStorage.getItem('token')))
         dispatch(setIsLogin(true))
         const getUserInfo=async()=>{
+          try{
             const response=await axios.get(baseUrl+'api/users/get-user-info/',
               {headers:{
               'Authorization':'Token '+localStorage.getItem('token')
@@ -42,6 +43,15 @@ function App() {
               const imageResponse=await axios.get(baseUrl+response.data.photo.substr(1),{responseType: 'arraybuffer'})
               dispatch(setPhotoSrc(URL.createObjectURL(new Blob([imageResponse.data], { type: 'image/png' }))));
             }
+          }
+          catch(error){
+              showAlert(error,'red')
+              showAlert('logging out','red')
+              localStorage.removeItem('token')
+              dispatch(setIsLogin(false))
+              dispatch(setToken(''))
+          }
+
         }
         if(!localStorage.getItem('isUserInfoLoaded')){
           getUserInfo();
@@ -78,6 +88,7 @@ function App() {
                 {userInfo.isLogin&&<>
                   <Route path='/table-extraction' element={<TableExtraction/>}/>
                   <Route path='/document-analysis' element={<DocumentAnalysis/>}/>
+                  <Route path='/image-conversion' element={<ImageConversion/>}/>
                 </>
                 }
                 <Route path='/display-pdf' element={<DisplayPdf/>}/>

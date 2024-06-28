@@ -5,17 +5,28 @@ import { useState,useEffect } from "react";
 import * as XLSX from 'xlsx'
 import { Card ,Button} from "react-bootstrap";
 import { showAlert } from "../AlertLoader";
+import { DownloadExcel } from "../DownloadFile/DownloadExcel";
 export const DisplayExcel=()=>{
     const [excelData,setExcelData]=useState()
     const loc=useLocation();
     const queryParameters=new URLSearchParams(loc.search)
     const file=queryParameters.get('file')
+    const fileName=queryParameters.get('fileName')||'table_extraction.xlsx'
+    const [excelName,setExcelName]=useState('')
     useEffect(()=>{
         try{
             const fetchData= async()=>{
+                try{
                 const response=await axios.get(file)
-                console.log(response.data)
-                setExcelData(response.data)
+                const responseData=response.data
+                const tableData={};
+                responseData.forEach((value,index)=>tableData[index]=value);
+                setExcelData(responseData)
+                }
+                catch(error){
+                    showAlert(error,'red')
+                    console.log(error)
+                }
             }
             fetchData();
         }
@@ -23,37 +34,18 @@ export const DisplayExcel=()=>{
             console.log(error)
         }   
     },[]);
-    const downloadExcelFile=()=>{
-        try{
-            const worksheets=[];
-            Object.keys(excelData).map((key)=>{
-                const dataArray=Object.values(excelData[key]).map((row)=>row)
-                const worksheet=XLSX.utils.aoa_to_sheet(dataArray)
-                worksheets.push({name:key,data:worksheet})
-            })
-            const workbook=XLSX.utils.book_new();
-            worksheets.forEach((worksheet,i)=>{
-                XLSX.utils.book_append_sheet(workbook,worksheet.data,'sheet'+worksheet.name)
-            })
-            XLSX.writeFile(workbook, "table extraction.xlsx");
-        }
-        catch(error){
-            showAlert(error,'red')
-        }
-
-    }
     return (
         <>
         <div id='display-excel'>
             <Card style={{border:'none'}}>
                 <Card.Title>
                 <h1>Extracted Tables</h1>
-                <Button onClick={downloadExcelFile} variant="success">Download</Button>
+                <Button onClick={()=>{DownloadExcel(excelData,fileName)}} variant="success">Download</Button>
                 </Card.Title>
                 <Card.Body className="d-flex flex-column align-items-center">
                 {excelData && Object.keys(excelData).map((key) => (
                     <fieldset style={{width:'60%'}}>
-                        <legend>Table {key}</legend>
+                        <legend>Table {parseInt(key)+1}</legend>
                     <Table key={key} striped bordered hover className="m-5" >
                             <thead>
                             </thead>
