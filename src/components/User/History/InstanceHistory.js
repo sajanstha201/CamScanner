@@ -4,11 +4,16 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import axios from "axios"
 import { showAlert } from "../../AlertLoader"
+import { faGofore } from "@fortawesome/free-brands-svg-icons"
+import { useImageConversionFile } from "../../../context/AppProvider"
+import { Navigate } from "react-router-dom"
 
 export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,downloadFile})=>{
+    const {imageConversionFile,setImageConversionFile}=useImageConversionFile()
     const userInfo=useSelector((state)=>state.userProfile)
     const [imageUrl,setImageUrl]=useState('')
     const baseUrl=useSelector((state)=>state.baseUrl).backend
+    const [goToICActivate,setGoToICActivate]=useState(false)
     const [count,setCount]=useState(0)
     useEffect(() => {
         const fetchImage = async () => {
@@ -21,8 +26,12 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
                 case 'tableExtraction':
                     imageUrl=instanceHistoryData.image;
                     break;
-                case 'DocumentAnalysis':
+                case 'documentAnalysis':
                     imageUrl=instanceHistoryData.image;
+                    break;
+                case 'imageConversion':
+                    imageUrl=baseUrl+instanceHistoryData.pages[0].image.substr(1)
+                    break;
                 default:
                   imageUrl=null;
               }
@@ -44,6 +53,9 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
     
         fetchImage();
       }, [instanceHistoryData.pages]);
+    if(goToICActivate){
+      return(<Navigate to="/image-conversion" />)
+    }
     const deleteHistory=async ()=>{
       try{
         let url=''
@@ -55,6 +67,9 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
         }
         else if(featureName==='documentAnalysis'){
           url='api/convert-doc/'
+        }
+        else if(featureName==='imageConversion'){
+          url='api/files/'
         }
         const response=await axios.delete(baseUrl+url+instanceHistoryData.id,{
           headers:{
@@ -68,6 +83,17 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
         showAlert(error,'red')
         console.log(error)
       }
+    }
+    const goToImageConversion=()=>{
+      try{
+        setImageConversionFile(prevData=>({...prevData,result:[...instanceHistoryData.pages]}))
+        setGoToICActivate(true)
+      }
+      catch(error){
+        showAlert(error,'red')
+        console.log(error)
+      }
+
     }
     return(
         <div className={`border bg-[white] hover:bg-gray-100 h-20 w-full flex  items-center jusitfy-center  relative cursor-pointer`}>
@@ -86,7 +112,11 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
               <FontAwesomeIcon icon={faTrash} onClick={deleteHistory} className="h-[80%] w-[20px] hover:h-[90%] hover:w-[22px]"/>
             </div>
             <div className="absolute left-[95%] ">
-                    <FontAwesomeIcon icon={faDownload} onClick={()=>{downloadFile(instanceHistoryData)}} className="h-[80%] w-[20px] hover:h-[90%] hover:w-[22px]"/>
+            {
+            featureName==='imageConversion'?
+            <FontAwesomeIcon icon={faGofore} onClick={goToImageConversion}/>:
+            <FontAwesomeIcon icon={faDownload} onClick={()=>{downloadFile(instanceHistoryData)}} className="h-[80%] w-[20px] hover:h-[90%] hover:w-[22px]"/>
+            }
             </div>
         </div>
     )

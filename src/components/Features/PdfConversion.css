@@ -4,15 +4,4 @@
     width: 100%;
     justify-content: center;
 }
-.pdf-conversion-submit-button div{
-    width: 150px;
-    height: 60px;
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: lightgray;
-    border-radius: 5px;
-    font-size:large;
-}
 
