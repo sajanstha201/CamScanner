@@ -1,6 +1,7 @@
 import tableExtractionImage from '../static/images/tableExtraction.png'
 import pdfConversionImage from '../static/images/pdfConversion.png'
 import documentAnalysisImage from '../static/images/documentAnalysis.png'
+import imgConverter from '../static/images/imgconversition.png'
 import { Link } from 'react-router-dom'
 export const Home=()=>{
     return(
@@ -24,6 +25,13 @@ export const Home=()=>{
             <img class="h-20" src={documentAnalysisImage} alt="Document Analysis"></img>
             <h1 class="font-bold text-2xl">Document Analysis</h1>
             <p class="text-zinc-700 text-sm md:text-base">Our innovative, user-friendly, and reliable document analysis tool offers intelligent document conversions, OCR, full API, and workflow automation as per your needs.</p>
+        </Link>
+        <Link  to='/document-analysis' class="no-underline bg-white h-100 w-[50%]  md:w-[25%] rounded-lg border-zinc-900 border shadow-sm shadow-zinc-700 p-4 flex flex-col justify-center items-center hover:shadow-cyan-500/50">
+            <img class="h-20" src={imgConverter} alt="Document Analysis"></img>
+            <h1 class="font-bold text-2xl">Image Conversion</h1>
+            <p class="text-zinc-700 text-sm md:text-base">Easily convert your PDF pages into high-quality images. Just upload your PDF, select your desired image format, and download the results in seconds. Fast, secure, and user-friendly!
+
+</p>
         </Link>
     </div>
         </>
