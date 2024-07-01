@@ -2,6 +2,8 @@
   import tableExtractionImage from '../static/images/tableExtraction.png'
 import pdfConversionImage from '../static/images/pdfConversion.png'
 import documentAnalysisImage from '../static/images/documentAnalysis.png'
+import imgConverter from '../static/images/imgconversition.png'
+
 export const Feature=()=>{
     return(
         <div className='m-5'>
@@ -74,6 +76,26 @@ export const Feature=()=>{
                   <li>High-quality character reconigation</li>
                   <li>Convert PDFs into searchable text</li>
                   <li>Extract text acessablility</li>
+              </ol>
+           </div>
+          </div>
+  
+        </div>
+
+      <div className='w-full flex   justify-center mb-11'>
+          <div className=' flex gap-1 mt-10 w-4/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
+          <div className='flex w-full  flex-col  flex-wrap'>
+            <div className='w-full flex justify-center items-center '>
+
+          <img class="h-20 w-20" src={imgConverter} sizes='30' alt="PDF Conversion"></img>
+            </div>
+           <h1 class="font-bold text-2xl text-blue-600">Image Conversion</h1>
+            <p class="text-zinc-700 text-sm md:text-base">Easily convert your PDF pages into high-quality images. Just upload your PDF, select your desired image format, and download the results in seconds. Fast, secure, and user-friendly!
+             </p>
+              <ol className='font-semibold text-xl  '>
+                  <li>High Quality: Maintain excellent resolution and clarity.</li>
+                  <li>Secure: Files are processed securely and not stored on our servers</li>
+                  <li>Batch Conversion: Convert all PDF pages at once.</li>
               </ol>
            </div>
           </div>
