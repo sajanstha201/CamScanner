@@ -7,8 +7,10 @@ import { showAlert } from "../../AlertLoader"
 import { faGofore } from "@fortawesome/free-brands-svg-icons"
 import { useImageConversionFile } from "../../../context/AppProvider"
 import { Navigate } from "react-router-dom"
+import { useMediaQuery } from "react-responsive"
 
 export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,downloadFile})=>{
+  const isMobile=useMediaQuery({query:'(max-width:1000px)'})
     const {imageConversionFile,setImageConversionFile}=useImageConversionFile()
     const userInfo=useSelector((state)=>state.userProfile)
     const [imageUrl,setImageUrl]=useState('')
@@ -105,9 +107,12 @@ export const InstanceHistory=({featureName,instanceHistoryData,deleteInstance,do
                 {featureName!=='tableExtraction'&&instanceHistoryData.file.split('/').pop()}
                 {featureName==='tableExtraction'&&userInfo.username+instanceHistoryData.created+'.xslx'}
             </div>
+            {!isMobile&&            
             <div className="absolute left-[50%]  w-[200px] overflow-hidden sm:hidden lg:flex">
                 {instanceHistoryData.created}
             </div>  
+            }
+
             <div className="absolute left-[85%] ">
               <FontAwesomeIcon icon={faTrash} onClick={deleteHistory} className="h-[80%] w-[20px] hover:h-[90%] hover:w-[22px]"/>
             </div>
