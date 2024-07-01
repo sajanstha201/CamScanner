@@ -39,6 +39,7 @@ function Footer(){
                         <Link to='/' class="text-md text-black no-underline">Our Story</Link>
                         <Link to='/' class="text-md  text-black no-underline">Blogs</Link>
                         <Link to='/contact-us' class="text-md text-black no-underline">Contact</Link>
+                        <Link to='/about-us' class="text-md text-black no-underline">About Us</Link>
                 </div>
             </div>
                 
