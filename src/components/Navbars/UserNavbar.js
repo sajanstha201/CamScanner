@@ -6,9 +6,11 @@ import { Nav,Navbar,Offcanvas} from 'react-bootstrap';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUser, faHistory, faCog, faBell, faQuestionCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { useMediaQuery } from 'react-responsive';
 export const UserNavbar=()=>{
     const userInfo=useSelector((state)=>state.userProfile)
     const [showUserOffCanvas,setShowUserOffCanvas]=useState(false)
+    const isMobile = useMediaQuery({ query: '(max-width: 1000px)' });
     return(
       <>
       <Nav>
@@ -22,7 +24,7 @@ export const UserNavbar=()=>{
               />
           </Nav.Link>
       </Nav>
-      <Offcanvas show={showUserOffCanvas} onHide={()=>setShowUserOffCanvas(false)} placement='end' style={{width:'250px'}}>
+      <Offcanvas show={showUserOffCanvas} onHide={()=>setShowUserOffCanvas(false)} placement={`end`} style={{width:'250px'}}>
           <Offcanvas.Header closeButton className='mb-4'>
             <Offcanvas.Title >
                 <Nav.Link>
@@ -38,8 +40,6 @@ export const UserNavbar=()=>{
           </Offcanvas.Header>
             <Offcanvas.Body>
             <Navbar>
-                <Navbar.Toggle></Navbar.Toggle>
-                <Navbar.Collapse>
                 <Nav className="mr-auto d-flex flex-column w-100 ">
                     <Nav.Link as={Link} to="/user/profile">
                         <FontAwesomeIcon icon={faUser} /> My Profile
@@ -57,7 +57,6 @@ export const UserNavbar=()=>{
                         <FontAwesomeIcon icon={faSignOutAlt} /> Log Out
                     </Nav.Link>
                     </Nav>
-                </Navbar.Collapse>
             </Navbar>
           </Offcanvas.Body>
       </Offcanvas>

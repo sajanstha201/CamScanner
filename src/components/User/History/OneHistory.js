@@ -1,6 +1,8 @@
+import { useMediaQuery } from "react-responsive"
 import { showAlert } from "../../AlertLoader"
 import { InstanceHistory } from "./InstanceHistory"
 export const OneHistory=({featureName,getMoreData,historyData,setHistoryData,downloadFile})=>{
+    const isMobile=useMediaQuery({query:'(max-width:1000px'})
     const deleteInstance=(instance)=>{
         try{
             const oldList=historyData
@@ -19,9 +21,11 @@ export const OneHistory=({featureName,getMoreData,historyData,setHistoryData,dow
             <div className="absolute left-[10%]">
                 Name
             </div>
-            <div className="absolute left-[60%] sm:hidden lg:flex">
-                Date
-            </div>  
+            {!isMobile&&
+                        <div className="absolute left-[60%] flex">
+                        Date
+                    </div>  }
+
         </div>
         <div  className="flex-wrap flex-col w-full">
             {

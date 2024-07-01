@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux"
+import { useMediaQuery } from "react-responsive"
 export const Profile=()=>{
     const userInfo=useSelector(state=>state.userProfile)
+    const isMoblie=useMediaQuery({query:'(max-width:1000px)'})
     return(
         <>
            <div className="w-full  bg-gray-100 flex flex-col md:flex-row lg:flex-row  justify-center gap-7 p-10 min-h-[80vh]">
@@ -17,9 +19,9 @@ export const Profile=()=>{
                         <h1  className="text-xl font-bold flex justify-center">Account</h1>
                         <div className="flex flex-col gap-4">
                         <div className="w-full flex flex-col lg:flex-row gap-5 ">
-                            <div className="w-[50%]">
+                            <div className={`${isMoblie?'w-[90%]':'w-[50%]'}`}>
                                         <label className="font-semibold text-lg text-zinc-900 flex justify-start" >Username</label>
-                                        <div  className=" h-10 px-4 w-full  flex items-start items-center text-zinc-700 font-mono border border-black    w-full   rounded-sm"  id='first_name'>
+                                        <div  className=" h-10 px-4 w-full  flex justify-start items-center text-zinc-700 font-mono border border-black    rounded-sm"  id='first_name'>
                                         {userInfo.username}
                                         </div>
                                     </div>
@@ -27,29 +29,29 @@ export const Profile=()=>{
                                     </div>
                             </div>
                             <div className="w-full flex flex-col lg:flex-row gap-5 ">
-                                <div className="w-[50%]">
+                                <div className={`${isMoblie?'w-[90%]':'w-[50%]'}`}>
                                         <label className="font-semibold text-lg text-zinc-900 flex justify-start" >First Name</label>
-                                        <div  className=" h-10 px-4 w-full flex items-start items-center text-zinc-700 font-mono border border-black    w-full   rounded-sm overflow-hidden"  id='first_name'>
+                                        <div  className=" h-10 px-4 w-full flex justify-start items-center text-zinc-700 font-mono border border-black    rounded-sm overflow-hidden"  id='first_name'>
                                         {userInfo.first_name}
                                         </div>
                                     </div>
-                                    <div className="w-[50%]">
+                                    <div className={`${isMoblie?'w-[90%]':'w-[50%]'}`}>
                                         <label className="font-semibold text-lg text-zinc-900 flex justify-start" >last Name</label>
-                                        <div className=" h-10 px-4 w-full text-zinc-700 flex items-start items-center font-mono border border-black  w-full  overflow-hidden rounded-sm" id='last_name' >
+                                        <div className=" h-10 px-4 w-full text-zinc-700 flex justify-start items-center font-mono border border-black overflow-hidden rounded-sm" id='last_name' >
                                         {userInfo.last_name}
                                         </div>
                                     </div>
                             </div>
                             <div className="w-full flex flex-col lg:flex-row gap-5 ">
-                                <div className="w-[50%]">
+                                <div className={`${isMoblie?'w-[90%]':'w-[50%]'}`}>
                                         <label className="font-semibold text-lg text-zinc-900 flex justify-start" >Email</label>
-                                        <div  className=" h-10 w-full px-4 flex items-start items-center text-zinc-700 font-mono border border-black   overflow-hidden w-full   rounded-sm"  id='first_name'>
+                                        <div  className=" h-10 w-full px-4 flex justify-start items-center text-zinc-700 font-mono border border-black   overflow-hidden rounded-sm"  id='first_name'>
                                         {userInfo.email}
                                         </div>
                                     </div>
-                                    <div className="w-[50%]">
+                                    <div className={`${isMoblie?'w-[90%]':'w-[50%]'}`}>
                                         <label className="font-semibold text-lg text-zinc-900 flex justify-start" >Phone Number</label>
-                                        <div className=" h-10 w-full px-4 text-zinc-700 flex items-start items-center font-mono border border-black overflow-hidden w-full   rounded-sm" id='last_name' >
+                                        <div className=" h-10 w-full px-4 text-zinc-700 flex justify-start items-center font-mono border border-black overflow-hidden rounded-sm" id='last_name' >
                                         {userInfo.contact}
                                     </div>
                             </div>
