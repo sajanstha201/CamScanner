@@ -6,15 +6,15 @@ import imgConverter from '../static/images/imgconversition.png'
 
 export const Feature=()=>{
     return(
-        <div className='m-5'>
+        <div className='md:m-4'>
         
-          <div className="w-full flex flex-col lg:flex-row md:flex-row items-center   px-3 justify-between gap-5">
-               <div className="flex flex-wrap flex-col w-full">
+          <div className="w-full flex flex-col lg:flex-row md:flex-row items-center   md:px-8 justify-between gap-5">
+               <div className="flex flex-wrap flex-col lg:w-full ">
                      <h1 className=' mt-1'>Our <span className="text-blue-600">Featuers</span></h1>
-                     <p className="text-gray-600">RAN offers high-quality PDF conversion that preserves the original formatting, images, and text layout. Our platform ensures fast and efficient processing for both single and batch file conversions. With an intuitive, user-friendly interface, anyone can convert files effortlessly without technical expertise. RAN prioritizes data security with advanced encryption to protect your files and maintain confidentiality. Supporting a wide range of file formats, RAN allows seamless conversion between PDFs and Word, Excel, PowerPoint, and image files. Our service integrates smoothly with popular cloud storage options like Google Drive, Dropbox, and OneDrive for easy file management. Enjoy consistent performance across all devices, including desktops, laptops, tablets, and smartphones. Plus, our dedicated customer support team is available 24/7 to assist you with any questions or issues, ensuring a smooth and hassle-free experience</p>
+                     <p className="text-gray-600 text-sm md:text-base">RAN offers high-quality PDF conversion that preserves the original formatting, images, and text layout. Our platform ensures fast and efficient processing for both single and batch file conversions. With an intuitive, user-friendly interface, anyone can convert files effortlessly without technical expertise. RAN prioritizes data security with advanced encryption to protect your files and maintain confidentiality. Supporting a wide range of file formats, RAN allows seamless conversion between PDFs and Word, Excel, PowerPoint, and image files. Our service integrates smoothly with popular cloud storage options like Google Drive, Dropbox, and OneDrive for easy file management. Enjoy consistent performance across all devices, including desktops, laptops, tablets, and smartphones. Plus, our dedicated customer support team is available 24/7 to assist you with any questions or issues, ensuring a smooth and hassle-free experience</p>
                </div>
                <div>
-               <img className=''sizes='30' src="/static/media/a.4d2fb8e12c556a228e55.png" alt="description" />
+               <img className='' src="/static/media/a.4d2fb8e12c556a228e55.png" alt="description" />
 
                </div>
           </div> 
@@ -22,8 +22,8 @@ export const Feature=()=>{
 
 
 
-      <div className='w-full flex mt-12   justify-center'>
-          <div className=' flex gap-1 mt-10 w-4/6  shadow-lg shadow-gray-800 rounded-lg px-2'>
+      <div className='w-full flex mt-12   justify-center px-2 md:px-32 lg:px-64'>
+          <div className=' flex gap-1 mt-10 w-full  shadow-lg shadow-gray-800 rounded-lg px-2'>
            <div className='flex w-full  flex-col  flex-wrap'>
             <div className='w-full flex justify-center items-center '>
 
