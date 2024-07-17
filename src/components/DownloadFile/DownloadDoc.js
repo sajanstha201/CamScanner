@@ -6,6 +6,7 @@ export const DownloadDoc=(docBlob,name)=>{
         a.style.display = 'none';
         document.body.appendChild(a);
         const url = window.URL.createObjectURL(docBlob);
+        console.log('url of downloaded file',url)
         a.href = url;
         a.download =name;
         a.click();
